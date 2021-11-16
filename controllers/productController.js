@@ -1,8 +1,6 @@
 const fs = require('fs');
 
-const products = JSON.parse(
-  fs.readFileSync(`${__dirname}/data/tours-simple.json`)
-);
+const products = JSON.parse(fs.readFileSync('./../data/tours-simple.json'));
 
 exports.checkID = (req, res, next, val) => {
   console.log(`Product id: ${val}`);

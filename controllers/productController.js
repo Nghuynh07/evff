@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const products = JSON.parse(fs.readFileSync('./../data/tours-simple.json'));
+const products = JSON.parse(fs.readFileSync('./data/tours-simple.json'));
 
 exports.checkID = (req, res, next, val) => {
   console.log(`Product id: ${val}`);
@@ -37,18 +37,14 @@ exports.createProduct = (req, res) => {
   const newID = products[products.length - 1].id + 1;
   const newProduct = Object.assign({ id: newID }, req.body);
   products.push(newProduct);
-  fs.writeFile(
-    './../data/tours-simple.json',
-    JSON.stringify(products),
-    (err) => {
-      res.status(201).json({
-        status: 'Success',
-        data: {
-          product: newProduct,
-        },
-      });
-    }
-  );
+  fs.writeFile('./data/tours-simple.json', JSON.stringify(products), (err) => {
+    res.status(201).json({
+      status: 'Success',
+      data: {
+        product: newProduct,
+      },
+    });
+  });
 };
 exports.getOneProduct = (req, res) => {
   console.log(req.params);

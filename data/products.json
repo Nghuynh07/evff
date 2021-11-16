@@ -1,0 +1,130 @@
+[
+  {
+    "name": "Apples - All Varieties",
+    "category": "Fruits",
+    "price": 2.0,
+    "packaging": "lb",
+    "photo": "photo",
+    "description": "Apples - All Varieties"
+  },
+  {
+    "name": "Blueberries",
+    "category": "Fruits",
+    "price": 2.5,
+    "packaging": "Basket(1pnt)",
+    "photo": "photo",
+    "description": "Blueberries"
+  },
+  {
+    "name": "Pears (Asian)",
+    "category": "Fruits",
+    "price": 2.5,
+    "packaging": "lb",
+    "photo": "photo",
+    "description": "Asian Pears"
+  },
+  {
+    "name": "Raspberries",
+    "category": "Fruits",
+    "price": 2.5,
+    "packaging": "lb",
+    "photo": "photo",
+    "description": "Raspberries"
+  },
+  {
+    "name": "Basil",
+    "category": "Herbs",
+    "price": 2.0,
+    "packaging": "4oz Bag",
+    "photo": "photo",
+    "description": "Basil"
+  },
+  {
+    "name": "Cilantro",
+    "category": "Herbs",
+    "price": 2.0,
+    "packaging": "2oz Bunch",
+    "photo": "photo",
+    "description": "Cilantro"
+  },
+  {
+    "name": "Dill-mature w/head",
+    "category": "Herbs",
+    "price": 1.0,
+    "packaging": "Stalk",
+    "photo": "photo",
+    "description": "Dill-mature w/head"
+  },
+  {
+    "name": "Dill-weed",
+    "category": "Herbs",
+    "price": 2.0,
+    "packaging": "2oz Bag",
+    "photo": "photo",
+    "description": "Dill-weed"
+  },
+  {
+    "name": "Beans (Green, Yellow, Purple)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "lb",
+    "photo": "photo",
+    "description": "Beans (Green, Yellow, Purple)"
+  },
+  {
+    "name": "Beets-Golden",
+    "category": "Vegetables",
+    "price": 3.0,
+    "packaging": "bun/3",
+    "photo": "photo",
+    "description": "Beets-Golden"
+  },
+  {
+    "name": "Beets-Red",
+    "category": "Vegetables",
+    "price": 3.0,
+    "packaging": "bun/3",
+    "photo": "photo",
+    "description": "Beets-Red"
+  },
+  {
+    "name": "Broccoli",
+    "category": "Vegetables",
+    "price": 3.0,
+    "packaging": "lb",
+    "photo": "photo",
+    "description": "Broccoli"
+  },
+  {
+    "name": "Cabbage (Green,Red)",
+    "category": "Vegetables",
+    "price": 1.5,
+    "packaging": "lb",
+    "photo": "photo",
+    "description": "Cabbage (Green,Red)"
+  },
+  {
+    "name": "Carrots",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "bun/6-7",
+    "photo": "photo",
+    "description": "Carrots"
+  },
+  {
+    "name": "Chard",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "bun/8-12",
+    "photo": "photo",
+    "description": "Chard"
+  },
+  {
+    "name": "Corn",
+    "category": "Vegetables",
+    "price": 0.79,
+    "packaging": "Cob",
+    "photo": "photo",
+    "description": "Corn"
+  }
+]

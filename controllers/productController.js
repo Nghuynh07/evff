@@ -1,76 +1,96 @@
-const fs = require('fs');
+const Product = require('./../models/productModel');
 
-const products = JSON.parse(fs.readFileSync('./data/tours-simple.json'));
+exports.getAllProducts = async (req, res) => {
+  try {
+    console.log(req.query);
 
-exports.checkID = (req, res, next, val) => {
-  console.log(`Product id: ${val}`);
-  if (req.params.id * 1 > products.length) {
-    return res.status(404).json({
+    // const products = await Product.find()
+    //   .where('category')
+    //   .equals('Vegetables')
+    //   .where('packaging')
+    //   .equals('lb')
+    //   .where('price')
+    //   .lte(2.5);
+
+    res.status(200).json({
+      status: 'Success',
+      length: products.length,
+      data: {
+        products,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
       status: 'Failed',
-      message: 'Invalid Id',
+      message: 'Unable to locate what you are trying to search',
     });
   }
-  next();
 };
 
-exports.checkBody = (req, res, next) => {
-  if (!req.body.name || !req.body.price) {
-    return res.status(404).json({
-      status: 'Failed',
-      message: 'Name and price fields are missing!',
-    });
-  }
-  next();
-};
-
-exports.getAllProducts = (req, res) => {
-  res.status(200).json({
-    status: 'Success',
-    requestedAt: req.requestTime,
-    data: {
-      products,
-    },
-  });
-};
-
-exports.createProduct = (req, res) => {
-  const newID = products[products.length - 1].id + 1;
-  const newProduct = Object.assign({ id: newID }, req.body);
-  products.push(newProduct);
-  fs.writeFile('./data/tours-simple.json', JSON.stringify(products), (err) => {
+exports.createProduct = async (req, res) => {
+  try {
+    const newProduct = await Product.create(req.body);
     res.status(201).json({
       status: 'Success',
       data: {
-        product: newProduct,
+        newProduct,
       },
     });
-  });
+  } catch (err) {
+    res.status(400).json({
+      status: 'Failed',
+      message: 'Invalid data sent!',
+    });
+  }
 };
-exports.getOneProduct = (req, res) => {
-  console.log(req.params);
-  const id = req.params.id * 1;
-
-  const product = products.find((product) => product.id === id);
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      product,
-    },
-  });
+exports.getOneProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        product,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'Failed',
+      message: 'Unable to locate the object you are requesting',
+    });
+  }
 };
 
-exports.updateOneProduct = (req, res) => {
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      product: '<Updated product...>',
-    },
-  });
+exports.updateOneProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        product,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'Failed',
+      message: 'Opps something went wrong while you are doing this',
+    });
+  }
 };
 
-exports.deleteOneProduct = (req, res) => {
-  res.status(204).json({
-    status: 'Success',
-    data: null,
-  });
+exports.deleteOneProduct = async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: 'Success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'Failed',
+      message: 'Opps something went wrong while you are doing this',
+    });
+  }
 };

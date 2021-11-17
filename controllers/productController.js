@@ -17,11 +17,40 @@ exports.getAllProducts = async (req, res) => {
     // {difficulty :'easy', duration: {$gte: 5}}
 
     //not querying right away b/c we want to chain other queries before executing it; since find() returns a query object, we setting it as a query variable then later await all queries that we are chaining at the same time. If we await the products right after the first query, then it would stop at the first query and not chaining the rest. Ideally we want to chain all the queries object that we set to query.
-    const query = Product.find(JSON.parse(queryStr));
+    let query = Product.find(JSON.parse(queryStr));
+    //sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      console.log(sortBy);
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('name');
+    }
+
+    //fields limiting
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
+
+    //pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+    if (req.query.page) {
+      const numProduct = await Product.countDocuments();
+      console.log(numProduct);
+      if (skip >= numProduct) throw new Error('This page does not exist');
+    }
+
     //EXECUTE QUERY
     const products = await query;
 
-    //below is one way to query. b/c find() method returns a query object so we can query right in there by chaining .where.equals etc... more information on the mmongoDB query section. The find() method and long with other query methods are actually a prototype of the query class.
+    //below is one way to query. b/c find() method returns a query object so we can query right in there by chaining .where.equals etc... more information on the mongoDB query section. The find() method and long with other query methods are actually a prototype of the query class.
     // const query = Product.find()
     //   .where('category')
     //   .equals('Vegetables')
@@ -93,7 +122,7 @@ exports.updateOneProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'Failed',
-      message: 'Opps something went wrong while you are doing this',
+      message: 'Something went wrong while you are doing this',
     });
   }
 };
@@ -108,7 +137,7 @@ exports.deleteOneProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'Failed',
-      message: 'Opps something went wrong while you are doing this',
+      message: 'Something went wrong while you are doing this',
     });
   }
 };

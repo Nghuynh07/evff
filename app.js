@@ -19,4 +19,12 @@ app.use(function (req, res, next) {
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'Failed',
+    message: `Cannot find ${req.originalUrl} on this server!`,
+  });
+  next();
+});
+
 module.exports = app;

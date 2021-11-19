@@ -12,11 +12,12 @@ const handleDuplicateFieldsErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
-const handleValidationsErrorDB = (err) => {
-  const errors = Object.values(err.errors).map((el) => el.message);
-  const message = `Invalid input. ${errors}`;
-  return new AppError(message, 400);
-};
+// const handleValidationsErrorDB = (err) => {
+//   const errors = Object.values(err.errors).map((el) => el.message);
+//   // const message = `Invalid input. ${errors.join('. ')}`;
+//   // const message = `Invalid input. ${errors.join('. ')}`;
+//   return new AppError(errors, 400);
+// };
 
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
@@ -53,9 +54,9 @@ module.exports = (err, req, res, next) => {
   } else if (process.env.NODE_ENV === 'production') {
     // let error = { ...err };
 
-    // if (err.name === 'CastError') err = handleCastErrorDB(err);
+    if (err.name === 'CastError') err = handleCastErrorDB(err);
     if (err.code === 11000) err = handleDuplicateFieldsErrorDB(err);
-    if (err.name === 'ValidationError') err = handleValidationsErrorDB(err);
+    // if (err.name === 'ValidationError') err = handleValidationsErrorDB(err);
     sendErrorProd(err, res);
   }
 };

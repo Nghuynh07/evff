@@ -15,6 +15,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'Success',
+    results: users.length,
     users,
   });
 });
@@ -41,6 +42,14 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     data: {
       user: updatedUser,
     },
+  });
+});
+
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { active: false });
+  res.status(204).json({
+    status: 'Success',
+    data: null,
   });
 });
 

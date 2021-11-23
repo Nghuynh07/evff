@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { promisify } = require('util');
 const User = require('./../models/userModel');
 const jwt = require('jsonwebtoken');
@@ -10,6 +11,16 @@ const signToken = (id) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
+
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  res.status(statusCode).json({
+    status: 'Success',
+    token,
+  });
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     role: req.body.role,
@@ -19,16 +30,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-
-  const token = signToken(newUser._id);
-
-  res.status(201).json({
-    status: 'Success',
-    token,
-    data: {
-      user: newUser,
-    },
-  });
+  createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -46,11 +48,7 @@ exports.login = catchAsync(async (req, res, next) => {
       new AppError('Incorrect credentials. Please try again or signup', 401)
     );
   }
-  const token = signToken(user._id);
-  res.status(200).json({
-    status: 'Login successful',
-    token,
-  });
+  createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -119,7 +117,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     'host'
   )}/api/v1/users/resetPassword/${resetToken}`;
 
-  const message = `Forgot your password? Submit a Patch request with your new password and confirmPassword: ${resetURL}\nIf you didn't forget your password, please ignore this email!`;
+  const message = `To reset your password click the link below.\n${resetURL}\nIf you did not make this request please disregard`;
   try {
     await sendEmail({
       email: req.body.email,
@@ -140,4 +138,44 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     );
   }
 });
-exports.resetPassword = (req, res, next) => {};
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  //1 Get the user based on the token
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  //2 if token has expires and there is a user set the new password
+  if (!user) {
+    return next(new AppError('Link has expires. Please request new link', 400));
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  await user.save();
+  createSendToken(user, 200, res);
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  //1 get the current user
+  const user = await User.findById(req.user.id).select('+password');
+  //2 check current password
+
+  if (!user.correctPassword(req.body.passwordCurrent, user.password)) {
+    return next(
+      new AppError('Your current password is incorrect. Please try again', 401)
+    );
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  createSendToken(user, 200, res);
+});

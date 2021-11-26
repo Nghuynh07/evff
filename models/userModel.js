@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: [40, 'Field must be less than or equal to 40 characters'],
     minlength: [3, 'Field must have more than or equal to 3 characters'],
+    lowercase: true,
   },
   lastName: {
     type: String,
@@ -16,6 +17,7 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: [40, 'Field must be less than or equal to 40 characters'],
     minlength: [3, 'Field must have more than or equal to 3 characters'],
+    lowercase: true,
   },
   email: {
     type: String,
@@ -56,7 +58,7 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
 });
-
+//document middleware
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
@@ -71,13 +73,13 @@ userSchema.pre('save', function (next) {
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
-
+//query middleware
 userSchema.pre(/^find/, function (next) {
   //this points to the current query
   this.find({ active: { $ne: false } });
   next();
 });
-
+//object methods
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword

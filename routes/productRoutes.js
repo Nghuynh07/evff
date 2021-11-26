@@ -5,18 +5,21 @@ const authController = require('./../controllers/authController');
 // router.param('id', productController.checkID);
 
 router
-  .route('/top-5-products')
-  .get(productController.aliasTopTours, productController.getAllProducts);
-router.route('/products-stats').get(productController.getProductsStats);
-
-router
   .route('/')
-  .get(authController.protect, productController.getAllProducts)
-  .post(productController.createProduct);
+  .get(productController.getAllProducts)
+  .post(
+    authController.protect,
+    authController.restrictTo('admin'),
+    productController.createProduct
+  );
 router
   .route('/:id')
   .get(productController.getOneProduct)
-  .patch(productController.updateOneProduct)
+  .patch(
+    authController.protect,
+    authController.restrictTo('admin'),
+    productController.updateOneProduct
+  )
   .delete(
     authController.protect,
     authController.restrictTo('admin'),

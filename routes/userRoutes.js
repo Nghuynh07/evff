@@ -14,9 +14,22 @@ router.patch(
   authController.updatePassword
 );
 
-router.patch('/updateMe', authController.protect, userController.updateMe);
-router.delete('/deleteMe', authController.protect, userController.deleteMe);
+//USER ROUTES ONCE LOGGED IN
+router.patch(
+  '/updateMe',
+  authController.protect,
+  authController.restrictTo('user'),
+  userController.updateMe
+);
+router.delete(
+  '/deleteMe',
+  authController.protect,
+  authController.restrictTo('user'),
+  userController.deleteMe
+);
 
+//ADMIN ROUTES FOR USERS
+router.use(authController.protect, authController.restrictTo('admin'));
 router
   .route('/')
   .get(userController.getAllUsers)

@@ -1,130 +1,331 @@
 [
   {
-    "name": "Apples - All Varieties",
+    "name": "Apples (all varieties)",
     "category": "Fruits",
     "price": 2.0,
     "packaging": "lb",
-    "photo": "photo",
-    "description": "Apples - All Varieties"
+    "photo": "photo"
   },
   {
-    "name": "Blueberries",
+    "name": "Blueberries (1 ct)",
     "category": "Fruits",
     "price": 2.5,
-    "packaging": "Basket(1pnt)",
-    "photo": "photo",
-    "description": "Blueberries"
+    "packaging": "1 basket (1pnt/basket)",
+    "photo": "photo"
   },
   {
-    "name": "Pears (Asian)",
+    "name": "Blueberries (4 ct)",
+    "category": "Fruits",
+    "price": 9.0,
+    "packaging": "4 baskets (1pnt/basket)",
+    "photo": "photo"
+  },
+  {
+    "name": "Blueberries (6 ct)",
+    "category": "Fruits",
+    "price": 12.0,
+    "packaging": "6 baskets (1pnt/basket) ",
+    "photo": "photo"
+  },
+  {
+    "name": "Blueberries (12 ct)",
+    "category": "Fruits",
+    "price": 22.0,
+    "packaging": "12 basket (1pnt/basket)",
+    "photo": "photo"
+  },
+  {
+    "name": "Pears ",
     "category": "Fruits",
     "price": 2.5,
     "packaging": "lb",
-    "photo": "photo",
-    "description": "Asian Pears"
+    "photo": "photo"
   },
   {
-    "name": "Raspberries",
+    "name": "Raspberries (1 ct)",
     "category": "Fruits",
     "price": 2.5,
-    "packaging": "lb",
-    "photo": "photo",
-    "description": "Raspberries"
+    "packaging": "1 basket (1pnt/basket)",
+    "photo": "photo"
+  },
+  {
+    "name": "Raspberries (4 ct)",
+    "category": "Fruits",
+    "price": 9.0,
+    "packaging": "4 baskets (1pnt/basket)",
+    "photo": "photo"
+  },
+  {
+    "name": "Raspberries (6 ct)",
+    "category": "Fruits",
+    "price": 12.0,
+    "packaging": "6 baskets (1pnt/basket) ",
+    "photo": "photo"
+  },
+  {
+    "name": "Raspberries (12 ct)",
+    "category": "Fruits",
+    "price": 22.0,
+    "packaging": "12 basket (1pnt/basket)",
+    "photo": "photo"
   },
   {
     "name": "Basil",
     "category": "Herbs",
     "price": 2.0,
     "packaging": "4oz Bag",
-    "photo": "photo",
-    "description": "Basil"
+    "photo": "photo"
   },
   {
     "name": "Cilantro",
     "category": "Herbs",
     "price": 2.0,
     "packaging": "2oz Bunch",
-    "photo": "photo",
-    "description": "Cilantro"
+    "photo": "photo"
   },
   {
-    "name": "Dill-mature w/head",
+    "name": "Dill (With Head)",
     "category": "Herbs",
     "price": 1.0,
     "packaging": "Stalk",
-    "photo": "photo",
-    "description": "Dill-mature w/head"
+    "photo": "photo"
   },
   {
-    "name": "Dill-weed",
+    "name": "Dill (Weed)",
     "category": "Herbs",
     "price": 2.0,
-    "packaging": "2oz Bag",
-    "photo": "photo",
-    "description": "Dill-weed"
+    "packaging": "2oz bag",
+    "photo": "photo"
   },
   {
     "name": "Beans (Green, Yellow, Purple)",
     "category": "Vegetables",
     "price": 2.5,
     "packaging": "lb",
-    "photo": "photo",
-    "description": "Beans (Green, Yellow, Purple)"
+    "photo": "photo"
   },
   {
-    "name": "Beets-Golden",
+    "name": "Beets (Golden)",
     "category": "Vegetables",
     "price": 3.0,
     "packaging": "bun/3",
-    "photo": "photo",
-    "description": "Beets-Golden"
+    "photo": "photo"
   },
   {
-    "name": "Beets-Red",
+    "name": "Beets (Red)",
     "category": "Vegetables",
     "price": 3.0,
     "packaging": "bun/3",
-    "photo": "photo",
-    "description": "Beets-Red"
+    "photo": "photo"
   },
   {
     "name": "Broccoli",
     "category": "Vegetables",
     "price": 3.0,
     "packaging": "lb",
-    "photo": "photo",
-    "description": "Broccoli"
+    "photo": "photo"
   },
   {
     "name": "Cabbage (Green,Red)",
     "category": "Vegetables",
     "price": 1.5,
     "packaging": "lb",
-    "photo": "photo",
-    "description": "Cabbage (Green,Red)"
+    "photo": "photo"
   },
   {
     "name": "Carrots",
     "category": "Vegetables",
     "price": 2.5,
     "packaging": "bun/6-7",
-    "photo": "photo",
-    "description": "Carrots"
+    "photo": "photo"
   },
   {
     "name": "Chard",
     "category": "Vegetables",
     "price": 2.5,
     "packaging": "bun/8-12",
-    "photo": "photo",
-    "description": "Chard"
+    "photo": "photo"
   },
   {
     "name": "Corn",
     "category": "Vegetables",
     "price": 0.79,
     "packaging": "Cob",
-    "photo": "photo",
-    "description": "Corn"
+    "photo": "photo"
+  },
+  {
+    "name": "Cucumbers",
+    "category": "Vegetables",
+    "price": 1.5,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Cucumbers-Pickling",
+    "category": "Vegetables",
+    "price": 1.5,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Eggplant (Globe, Asian)",
+    "category": "Vegetables",
+    "price": 3.25,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Garlic (Siberian Red)",
+    "category": "Vegetables",
+    "price": 6,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Garlic Scapes",
+    "category": "Vegetables",
+    "price": 1.5,
+    "packaging": "bun/10",
+    "photo": "photo"
+  },
+  {
+    "name": "Kale (Green, Red)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "bun/10-12",
+    "photo": "photo"
+  },
+  {
+    "name": "Lettuce (Butter/Bibb)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "head",
+    "photo": "photo"
+  },
+  {
+    "name": "Lettuce (Red Leaf)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "head",
+    "photo": "photo"
+  },
+  {
+    "name": "Lettuce (Romaine)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "head",
+    "photo": "photo"
+  },
+  {
+    "name": "Lettuce (Salad Mix)",
+    "category": "Vegetables",
+    "price": 3.5,
+    "packaging": "0.5lb bag",
+    "photo": "photo"
+  },
+  {
+    "name": "Onion (Red)",
+    "category": "Vegetables",
+    "price": 1.75,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Onion (Yellow)",
+    "category": "Vegetables",
+    "price": 1.5,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Onion (Walla Walla)",
+    "category": "Vegetables",
+    "price": 2.25,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Peas (Sugar Snap)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "0.5lb bag",
+    "photo": "photo"
+  },
+  {
+    "name": "Bell Peppers (Green)",
+    "category": "Vegetables",
+    "price": 1.75,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Bell Peppers (Red, Orange)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Jalapenos Hot Peppers",
+    "category": "Vegetables",
+    "price": 3.0,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Jalapenos Hot Peppers (All Others)",
+    "category": "Vegetables",
+    "price": 3.5,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Spinach (Green)",
+    "category": "Vegetables",
+    "price": 3.0,
+    "packaging": "0.5lb bag",
+    "photo": "photo"
+  },
+  {
+    "name": "Spinach (Purple Orach)",
+    "category": "Vegetables",
+    "price": 3.5,
+    "packaging": "0.5lb bag",
+    "photo": "photo"
+  },
+  {
+    "name": "Squash (Summer - Zucchini, yellow)",
+    "category": "Vegetables",
+    "price": 2.5,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Squash (Winter - Kuri, Delicata)",
+    "category": "Vegetables",
+    "price": 2.0,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Tomatillos",
+    "category": "Vegetables",
+    "price": 3.25,
+    "packaging": "lb",
+    "photo": "photo"
+  },
+  {
+    "name": "Tomatoes (Mixed Small)",
+    "category": "Vegetables",
+    "price": 4.0,
+    "packaging": "1 basket (1pnt/basket)",
+    "photo": "photo"
+  },
+  {
+    "name": "Tomatoes (All Varieties Med-Large)",
+    "category": "Vegetables",
+    "price": 3.5,
+    "packaging": "lb",
+    "photo": "photo"
   }
 ]

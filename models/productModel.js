@@ -6,9 +6,6 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, 'Name is required'],
       trim: true,
-      unique: true,
-      maxlength: [40, 'Field must not exceed 40 characters'],
-      minlength: [3, 'Field must be at least 3 characters'],
     },
     category: {
       type: String,
@@ -22,11 +19,6 @@ const productSchema = mongoose.Schema(
     packaging: {
       type: String,
       required: [true, 'Packaging is required'],
-      trim: true,
-    },
-    description: {
-      type: String,
-      required: [true, 'Description is required'],
       trim: true,
     },
     photo: {

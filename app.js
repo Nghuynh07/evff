@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cors = require('cors');
 //GLOABL Middleware
 
 //For security HTTP headers
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-//limit requests from same API
+// limit requests from same API
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
@@ -30,8 +31,9 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 //body parser, reading data from body into req.body
-app.use(express.json({ limit: '20kb' }));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 //data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 //data sanitization against XSS
@@ -50,6 +52,7 @@ app.use(function (req, res, next) {
   next();
 });
 //routes
+
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 

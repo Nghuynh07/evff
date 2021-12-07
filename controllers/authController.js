@@ -193,3 +193,10 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   createSendToken(user, 200, res);
 });
+
+exports.logout = (req, res) => {
+  res.clearCookie('jwt');
+  res.status(200).json({
+    message: 'Sign out success',
+  });
+};

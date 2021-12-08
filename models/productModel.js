@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const productSchema = mongoose.Schema(
   {
@@ -8,9 +9,9 @@ const productSchema = mongoose.Schema(
       trim: true,
     },
     category: {
-      type: String,
-      required: [true, 'Category is required'],
-      enum: ['Fruits', 'Vegetables', 'Herbs'],
+      type: ObjectId,
+      ref: 'Category',
+      required: true,
     },
     price: {
       type: Number,
@@ -24,6 +25,9 @@ const productSchema = mongoose.Schema(
     photo: {
       type: String,
       required: [true, 'Image is required'],
+    },
+    quantity: {
+      type: Number,
     },
     createdAt: {
       type: Date,

@@ -1,8 +1,9 @@
 const express = require('express');
-const router = express.Router();
+
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 
+const router = express.Router();
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
@@ -16,18 +17,14 @@ router.patch(
 );
 
 //USER ROUTES ONCE LOGGED IN
+router.use(authController.protect);
+
 router.patch(
   '/updateMe',
-  authController.protect,
-  authController.restrictTo('user'),
+  userController.uploadUserPhoto,
   userController.updateMe
 );
-router.delete(
-  '/deleteMe',
-  authController.protect,
-  authController.restrictTo('user'),
-  userController.deleteMe
-);
+router.delete('/deleteMe', userController.deleteMe);
 
 //ADMIN ROUTES FOR USERS
 router.use(authController.protect, authController.restrictTo('admin'));

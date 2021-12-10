@@ -29,12 +29,8 @@ const productSchema = mongoose.Schema(
     quantity: {
       type: Number,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-      select: false,
-    },
   },
+  { timestamps: true },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },

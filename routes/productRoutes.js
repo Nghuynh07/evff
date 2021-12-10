@@ -10,6 +10,7 @@ router
   .post(
     authController.protect,
     authController.restrictTo('admin'),
+    productController.productPhotoUpload,
     productController.createProduct
   );
 router

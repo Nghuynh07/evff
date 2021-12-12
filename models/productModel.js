@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { ObjectId } = mongoose.Schema;
+// const { ObjectId } = mongoose.Schema;
 
 const productSchema = mongoose.Schema(
   {
@@ -9,9 +9,8 @@ const productSchema = mongoose.Schema(
       trim: true,
     },
     category: {
-      type: ObjectId,
-      ref: 'Category',
-      required: true,
+      type: String,
+      enum: ['Fruits', 'Vegetables', 'Herbs', 'Eggs', 'Dairy', 'Poultry'],
     },
     price: {
       type: Number,
@@ -28,6 +27,7 @@ const productSchema = mongoose.Schema(
     },
     quantity: {
       type: Number,
+      default: 1,
     },
   },
   { timestamps: true },

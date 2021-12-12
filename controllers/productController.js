@@ -3,12 +3,13 @@ const Product = require('./../models/productModel');
 const multer = require('multer');
 
 const multerStorage = multer.diskStorage({
-  destination: (req, res, cb) => {
-    cb(null, 'public/products');
+  destination: (req, file, cb) => {
+    cb(null, 'public/img/users');
   },
   filename: (req, file, cb) => {
+    // user-29083490-2343.jpeg
     const ext = file.mimetype.split('/')[1];
-    cb(null, `product-${req.product.id}-${Date.now()}.${ext}`);
+    cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
   },
 });
 
@@ -16,7 +17,7 @@ const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
-    cb(new AppError('Not an image', 400), false);
+    cb(new AppError('Not An image! Please upload only images', 400), false);
   }
 };
 

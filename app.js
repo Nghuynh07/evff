@@ -44,7 +44,7 @@ app.use(xss());
 //Prevent parameter pollution
 app.use(hpp());
 
-app.use(express.static(`${__dirname}/public`));
+// app.use(express.static(`${__dirname}/public`));
 
 //test middleware
 app.use(function (req, res, next) {

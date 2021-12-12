@@ -3,12 +3,11 @@ const categoryController = require('./../controllers/categoryController');
 const router = express.Router();
 const authController = require('./../controllers/authController');
 
+router.use(authController.protect, authController.restrictTo('admin'));
+
 router
   .route('/')
-  .post(
-    authController.protect,
-    authController.restrictTo('admin'),
-    categoryController.createCat
-  );
+  .get(categoryController.getAll)
+  .post(categoryController.createCat);
 
 module.exports = router;

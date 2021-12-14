@@ -10,21 +10,20 @@ router.get('/logout', authController.logout);
 
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
-router.patch(
-  '/updateMyPassword',
-  authController.protect,
-  authController.updatePassword
-);
 
 //USER ROUTES ONCE LOGGED IN
 router.use(authController.protect);
 
-router.patch(
-  '/updateMe',
-  userController.uploadUserPhoto,
-  userController.updateMe
-);
-router.delete('/deleteMe', userController.deleteMe);
+router
+  .patch('/updateMyPassword', authController.updatePassword)
+  .patch(
+    '/updateMe',
+    userController.uploadUserPhoto,
+    userController.resizeUserPhoto,
+    userController.updateMe
+  )
+  .get('/me', userController.getMe, userController.getOneUser)
+  .delete('/deleteMe', userController.deleteMe);
 
 //ADMIN ROUTES FOR USERS
 router.use(authController.protect, authController.restrictTo('admin'));

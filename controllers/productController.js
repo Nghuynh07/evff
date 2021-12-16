@@ -2,18 +2,7 @@ const globalHandlers = require('./globalHandlers');
 const Product = require('./../models/productModel');
 const multer = require('multer');
 const sharp = require('sharp');
-
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/products');
-//   },
-//   filename: (req, file, cb) => {
-//     // user-29083490-2343.jpeg
-//     const ext = file.mimetype.split('/')[1];
-//     cb(null, `product-${req.body.name}-${Date.now()}.${ext}`);
-//   },
-// });
-
+const catchAsync = require('./../utils/catchAsync');
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -28,21 +17,26 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
+// exports.productPhotoUpload = upload.single('photo');
 
 exports.productPhotoUpload = upload.single('photo');
 
-exports.resizeProductPhoto = (req, res, next) => {
+//upload.fields()
+//upload.array()
+
+exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   console.log(req.file);
-  req.file.filename = `product-${req.body.name}-${Date.now()}.jpeg`;
-  sharp(req.file.buffer)
-    // .resize(500, 500)
+  req.body.photo = `product-${req.body.name}-${Date.now()}.jpeg`;
+  await sharp(req.file.buffer)
+    .resize(2000, 1333)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/products/${req.file.filename}`);
+    .toFile(`public/img/products/${req.body.photo}`);
+
   next();
-};
+});
 
 exports.getAllProducts = globalHandlers.getAll(Product);
 exports.createProduct = globalHandlers.createOne(Product);

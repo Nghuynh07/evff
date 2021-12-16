@@ -23,7 +23,7 @@ const productSchema = mongoose.Schema(
     },
     photo: {
       type: String,
-      required: [true, 'Image is required'],
+      default: 'default.jpg',
     },
   },
   { timestamps: true },

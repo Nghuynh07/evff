@@ -5,12 +5,12 @@ const sharp = require('sharp');
 
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {
-//     cb(null, 'public/products');
+//     cb(null, 'public/img/products');
 //   },
 //   filename: (req, file, cb) => {
 //     // user-29083490-2343.jpeg
 //     const ext = file.mimetype.split('/')[1];
-//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+//     cb(null, `product-${req.body.name}-${Date.now()}.${ext}`);
 //   },
 // });
 
@@ -37,7 +37,7 @@ exports.resizeProductPhoto = (req, res, next) => {
   console.log(req.file);
   req.file.filename = `product-${req.body.name}-${Date.now()}.jpeg`;
   sharp(req.file.buffer)
-    .resize(500, 500)
+    // .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`public/img/products/${req.file.filename}`);

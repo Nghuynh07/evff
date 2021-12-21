@@ -5,6 +5,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
+const braintreeRouter = require('./routes/braintreeRoutes');
 // const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -56,6 +57,7 @@ app.use(function (req, res, next) {
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/braintree', braintreeRouter);
 
 //unhandled routes
 app.all('*', (req, res, next) => {

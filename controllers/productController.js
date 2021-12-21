@@ -38,6 +38,17 @@ exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.getProductPhoto = async (req, res) => {
+  console.log(req);
+  const productPhoto = await Product.findById(req.params.id, req.body.photo);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      productPhoto,
+    },
+  });
+};
+
 exports.getAllProducts = globalHandlers.getAll(Product);
 exports.createProduct = globalHandlers.createOne(Product);
 exports.getOneProduct = globalHandlers.getOne(Product);

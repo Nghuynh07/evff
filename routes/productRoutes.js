@@ -14,6 +14,7 @@ router
     productController.resizeProductPhoto,
     productController.createProduct
   );
+router.route('/photo/:id').get(productController.getProductPhoto);
 router
   .route('/:id')
   .get(productController.getOneProduct)

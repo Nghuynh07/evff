@@ -108,3 +108,29 @@ exports.createOneUser = (req, res) => {
     message: 'Route is not yet defined',
   });
 };
+
+exports.addOrderToUserHistory = async (req, res, next) => {
+  try {
+    let history = [];
+    await req.body.order.products.forEach((item) => {
+      history.push({
+        _id: item._id,
+        name: item.name,
+        category: item.category,
+        quantity: item.count,
+        transaction_id: req.body.order.transaction_id,
+        amount: req.body.order.amount,
+      });
+    });
+    await User.findOneAndUpdate(
+      {
+        _id: req.user._id,
+      },
+      { $push: { history: history } },
+      { new: true }
+    );
+    next();
+  } catch (err) {
+    console.log(err);
+  }
+};

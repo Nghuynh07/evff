@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const { ObjectId } = mongoose.Schema;
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -52,6 +53,7 @@ const userSchema = new mongoose.Schema({
       message: 'Passwords do not match',
     },
   },
+  history: [],
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,

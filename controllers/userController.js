@@ -67,10 +67,24 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       )
     );
   }
-  //2) Update user document
-  const filteredBody = filterObj(req.body, 'firstName', 'lastName', 'email');
-  if (req.file) filteredBody.photo = req.file.filename;
 
+  if (req.body.transaction) {
+    return;
+  }
+
+  //2) Update user document
+  const filteredBody = filterObj(
+    {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+    },
+    'firstName',
+    'lastName',
+    'email'
+  );
+
+  if (req.file) filteredBody.photo = req.file.filename;
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
     runValidators: true,
@@ -118,7 +132,7 @@ exports.addOrderToUserHistory = async (req, res, next) => {
         name: item.name,
         category: item.category,
         quantity: item.count,
-        transaction_id: req.body.order.transaction_id,
+        transaction: req.body.order.transaction,
         amount: req.body.order.amount,
       });
     });

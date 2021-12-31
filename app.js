@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'development') {
 //body parser, reading data from body into req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: '*' }));
+app.use(cors());
 //data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 //data sanitization against XSS

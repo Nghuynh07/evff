@@ -4,8 +4,7 @@ exports.orderCreate = async (req, res) => {
   try {
     req.body.order.user = req.user;
     const order = await new Order(req.body.order);
-    // console.log('REQ BODY ORDER', req.body.order);
-    // console.log('REQ USER first name', req.user.firstName);
+
     order.save((err, data) => {
       if (err) {
         return res.status(400).json({
@@ -35,7 +34,7 @@ exports.getAllOrders = async (req, res) => {
 
 exports.getStatusValues = async (req, res) => {
   try {
-    res.json(Order.schema.path('status').enumValues);
+    await res.json(Order.schema.path('status').enumValues);
   } catch (err) {
     console.log(err);
   }
@@ -69,4 +68,20 @@ exports.updateOrderStatus = (req, res) => {
       res.json(order);
     }
   );
+};
+
+exports.getUserOrderHistory = async (req, res) => {
+  await Order.find({ user: req.user._id })
+    .populate('user', '_id firstName lastName')
+    .sort('-created')
+    .exec((err, orders) => {
+      if (err) {
+        res.status(400).json({ err: err });
+      }
+      res.json({
+        status: 'success',
+        length: orders.length,
+        orders,
+      });
+    });
 };

@@ -3,6 +3,7 @@ const Product = require('./../models/productModel');
 const multer = require('multer');
 const sharp = require('sharp');
 const catchAsync = require('./../utils/catchAsync');
+
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -27,8 +28,9 @@ exports.productPhotoUpload = upload.single('photo');
 exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  console.log(req.file);
+  // console.log(req);
   req.body.photo = `product-${req.body.name}-${Date.now()}.jpeg`;
+
   await sharp(req.file.buffer)
     .resize(2000, 1333)
     .toFormat('jpeg')
@@ -37,17 +39,6 @@ exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
 
   next();
 });
-
-exports.getProductPhoto = async (req, res) => {
-  console.log(req);
-  const productPhoto = await Product.findById(req.params.id, req.body.photo);
-  res.status(200).json({
-    status: 'success',
-    data: {
-      productPhoto,
-    },
-  });
-};
 
 exports.getAllProducts = globalHandlers.getAll(Product);
 exports.createProduct = globalHandlers.createOne(Product);

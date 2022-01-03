@@ -7,13 +7,14 @@ const userController = require('../controllers/userController');
 //USER ROUTER FOR ORDERS
 
 router.use(authController.protect);
+
+router.get('/userOrderHistory', orderController.getUserOrderHistory);
 router
   .route('/')
   .post(userController.addOrderToUserHistory, orderController.orderCreate);
 
 ///ADMIN ROUTES FOR ORDERS
 router.use(authController.protect, authController.restrictTo('admin'));
-
 router.route('/').get(orderController.getAllOrders);
 
 router

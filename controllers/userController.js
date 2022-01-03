@@ -4,6 +4,7 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const globalHandlers = require('./globalHandlers');
+const Order = require('./../models/orderModel');
 
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {

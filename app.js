@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const productRouter = require('./routes/productRoutes');
@@ -13,6 +14,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
+const serveStatic = require('serve-static');
 //GLOABL Middleware
 
 //For security HTTP headers
@@ -35,6 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //body parser, reading data from body into req.body
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 //data sanitization against NoSQL query injection
@@ -43,10 +46,9 @@ app.use(mongoSanitize());
 app.use(xss());
 //serving static files
 
+app.use('/public', express.static('public'));
 //Prevent parameter pollution
 app.use(hpp());
-
-// app.use(express.static(`${__dirname}/public`));
 
 //test middleware
 app.use(function (req, res, next) {
@@ -55,6 +57,7 @@ app.use(function (req, res, next) {
   next();
 });
 //routes
+
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);

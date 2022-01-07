@@ -21,6 +21,9 @@ const productSchema = mongoose.Schema(
       required: [true, 'Packaging is required'],
       trim: true,
     },
+    quantity: {
+      type: Number,
+    },
     photo: {
       type: String,
     },

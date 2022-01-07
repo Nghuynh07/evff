@@ -3,8 +3,10 @@ const Product = require('./../models/productModel');
 const multer = require('multer');
 const sharp = require('sharp');
 const catchAsync = require('./../utils/catchAsync');
-
+const formidable = require('formidable');
+const _ = require('lodash');
 const multerStorage = multer.memoryStorage();
+const fs = require('fs');
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -35,10 +37,41 @@ exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
     .resize(2000, 1333)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/products/${req.body.photo}`);
+    .toFile(`public/${req.body.photo}`);
 
   next();
 });
+
+// exports.photo = (req, res) => {
+//   console.log(req);
+// };
+
+// exports.createProduct = (req, res) => {
+//   let form = new formidable.IncomingForm();
+//   form.keepExtensions = true;
+//   form.parse(req, (err, fields, files) => {
+//     if (err) {
+//       return res.status(400).json({
+//         error: 'Image could not be uploaded',
+//       });
+//     }
+//     let product = new Product(fields);
+
+//     if (files.photo) {
+//       // product.photo.data = fs.readFileSync(files.photo.path);
+//       product.photo.contentType = files.photo.type;
+//     }
+
+//     product.save((err, result) => {
+//       if (err) {
+//         return res.status(400).json({
+//           error: err,
+//         });
+//       }
+//       res.json(result);
+//     });
+//   });
+// };
 
 exports.getAllProducts = globalHandlers.getAll(Product);
 exports.createProduct = globalHandlers.createOne(Product);

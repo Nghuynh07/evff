@@ -4,6 +4,13 @@ const productController = require('./../controllers/productController');
 const authController = require('./../controllers/authController');
 // router.param('id', productController.checkID);
 
+// router
+//   .route('/getProductCategories')
+//   .get(
+//     authController.protect,
+//     authController.restrictTo('admin'),
+//     productController.getProductCategory
+//   );
 router
   .route('/')
   .get(productController.getAllProducts)

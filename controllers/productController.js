@@ -42,35 +42,12 @@ exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
-// exports.photo = (req, res) => {
-//   console.log(req);
-// };
-
-// exports.createProduct = (req, res) => {
-//   let form = new formidable.IncomingForm();
-//   form.keepExtensions = true;
-//   form.parse(req, (err, fields, files) => {
-//     if (err) {
-//       return res.status(400).json({
-//         error: 'Image could not be uploaded',
-//       });
-//     }
-//     let product = new Product(fields);
-
-//     if (files.photo) {
-//       // product.photo.data = fs.readFileSync(files.photo.path);
-//       product.photo.contentType = files.photo.type;
-//     }
-
-//     product.save((err, result) => {
-//       if (err) {
-//         return res.status(400).json({
-//           error: err,
-//         });
-//       }
-//       res.json(result);
-//     });
-//   });
+// exports.getProductCategory = async (req, res) => {
+//   try {
+//     await res.json(Product.schema.path('category').enumValues);
+//   } catch (err) {
+//     console.log(err);
+//   }
 // };
 
 exports.getAllProducts = globalHandlers.getAll(Product);

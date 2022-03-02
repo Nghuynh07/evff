@@ -3,10 +3,10 @@ const Product = require('./../models/productModel');
 const multer = require('multer');
 const sharp = require('sharp');
 const catchAsync = require('./../utils/catchAsync');
-const formidable = require('formidable');
+// const formidable = require('formidable');
 const _ = require('lodash');
 const multerStorage = multer.memoryStorage();
-const fs = require('fs');
+// const fs = require('fs');
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {

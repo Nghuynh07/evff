@@ -65,10 +65,10 @@ app.use(function (req, res, next) {
 app.use(compression());
 //routes
 
-app.use('/api/v1/categories', categoryRouter);
+// app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/braintree', braintreeRouter);
+// app.use('/api/v1/braintree', braintreeRouter);
 app.use('/api/v1/orders', orderRouter);
 
 //unhandled routes

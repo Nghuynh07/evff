@@ -1,28 +1,33 @@
-const express = require('express');
-const app = express();
 const path = require('path');
-const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controllers/errorController');
-const productRouter = require('./routes/productRoutes');
-const userRouter = require('./routes/userRoutes');
-const categoryRouter = require('./routes/categoryRoutes');
-const braintreeRouter = require('./routes/braintreeRoutes');
-const orderRouter = require('./routes/orderRoutes');
-// const rateLimit = require('express-rate-limit');
+const express = require('express');
+const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
-const serveStatic = require('serve-static');
+
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+// const rateLimit = require('express-rate-limit');
+
+const compression = require('compression');
+
+const AppError = require('./utils/appError');
+const orderRouter = require('./routes/orderRoutes');
+const globalErrorHandler = require('./controllers/errorController');
+const productRouter = require('./routes/productRoutes');
+const userRouter = require('./routes/userRoutes');
 //GLOABL Middleware
 
 //For security HTTP headers
 app.use(helmet());
-
+app.enable('trust proxy');
+app.use(cors());
+app.options('*', cors());
+app.use(express.static(path.join(__dirname, 'public')));
 //Development logging
 if (process.env.NODE_ENV === 'development') {
-  const morgan = require('morgan');
   app.use(morgan('dev'));
 }
 
@@ -37,16 +42,16 @@ if (process.env.NODE_ENV === 'development') {
 
 //body parser, reading data from body into req.body
 app.use(express.json());
-
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 //data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 //data sanitization against XSS
 app.use(xss());
 //serving static files
 
-app.use('/public', express.static('public'));
 //Prevent parameter pollution
 app.use(hpp());
 
@@ -56,6 +61,8 @@ app.use(function (req, res, next) {
   // console.log(req.headers);
   next();
 });
+
+app.use(compression());
 //routes
 
 app.use('/api/v1/categories', categoryRouter);

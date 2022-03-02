@@ -19,7 +19,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 //GLOABL Middleware
-
+const app = express();
 //For security HTTP headers
 app.use(helmet());
 app.enable('trust proxy');

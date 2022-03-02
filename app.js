@@ -25,7 +25,15 @@ app.use(helmet());
 app.enable('trust proxy');
 app.use(cors());
 app.options('*', cors());
-app.use(express.static(path.join(__dirname, 'public')));
+
+const publicPath = path.join(__dirname, 'public');
+
+app.use(express.static(publicPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
+
 //Development logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

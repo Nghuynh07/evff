@@ -1,0 +1,41 @@
+.orders {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+.orders ul {
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.orders ul li {
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+.orders ul li:not(last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.orders h4 {
+  font-size: 1.5rem;
+}
+.orderProductsInfo {
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.orderProductsInfoContainer {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  background-color: lightcoral;
+}

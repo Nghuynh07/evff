@@ -1,0 +1,10 @@
+.cartContainer {
+  width: 80vw;
+  margin: 10vh auto;
+  padding: 2rem;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 4rem;
+}

@@ -1,0 +1,35 @@
+.header {
+  grid-row: 1 / span 1;
+  grid-column: 1 / -1;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: overlay;
+  background-image: url("../image/cover.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 85vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.header-title {
+  font-size: 8rem;
+  text-transform: capitalize;
+  color: #fffde7;
+  position: relative;
+  font-weight: 700;
+}
+
+.header-paragraph {
+  font-size: 3rem;
+  color: #fffde7;
+  text-transform: capitalize;
+
+  margin-bottom: 2rem;
+}

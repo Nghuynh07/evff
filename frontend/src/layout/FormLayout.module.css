@@ -1,0 +1,9 @@
+.formLayout {
+  margin: auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: minmax(35rem, 1fr);
+  grid-template-rows: minmax(min-content, 1fr);
+
+  align-content: center;
+}

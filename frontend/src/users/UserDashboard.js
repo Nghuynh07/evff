@@ -1,12 +1,12 @@
-import { useContext, useState, useEffect } from "react";
-import DashboardContainer from "../layout/DashboardContainer";
-import { Link } from "react-router-dom";
-import classes from "../admin/AdminDashboard.module.css";
-import { AuthContext } from "../store/auth-context";
-import { Route } from "react-router-dom";
-import UpdatePassword from "../users/UpdatePassword";
-import UpdateProfile from "../users/UpdateProfile";
-import PurchaseHistory from "./PurchaseHistory";
+import { useContext } from 'react';
+import DashboardContainer from '../layout/DashboardContainer';
+import { Link } from 'react-router-dom';
+import classes from '../admin/AdminDashboard.module.css';
+import { AuthContext } from '../store/auth-context';
+import { Route } from 'react-router-dom';
+import UpdatePassword from '../users/UpdatePassword';
+import UpdateProfile from '../users/UpdateProfile';
+import PurchaseHistory from './PurchaseHistory';
 
 const UserDashboard = () => {
   const auth = useContext(AuthContext);
@@ -22,22 +22,22 @@ const UserDashboard = () => {
     return (
       <ul className={classes.adminDashboard}>
         <li>
-          <Link className={classes.link} to='/users-dashboard/update-profile'>
+          <Link className={classes.link} to="/users-dashboard/update-profile">
             Update Profile
           </Link>
         </li>
         <li>
-          <Link className={classes.link} to='/users-dashboard/update-password'>
+          <Link className={classes.link} to="/users-dashboard/update-password">
             Update Password
           </Link>
         </li>
         <li>
-          <Link className={classes.link} to='/cart'>
+          <Link className={classes.link} to="/cart">
             Cart
           </Link>
         </li>
         <li>
-          <Link className={classes.link} to='/users-dashboard/order-history'>
+          <Link className={classes.link} to="/users-dashboard/order-history">
             Order History
           </Link>
         </li>
@@ -63,13 +63,13 @@ const UserDashboard = () => {
     <DashboardContainer>
       {userLinks()}
       {userInfo()}
-      <Route path='/users-dashboard/:update-password'>
+      <Route path="/users-dashboard/:update-password">
         <UpdatePassword />
       </Route>
-      <Route path='/users-dashboard/:update-profile'>
+      <Route path="/users-dashboard/:update-profile">
         <UpdateProfile />
       </Route>
-      <Route path='/users-dashboard/:order-history'>
+      <Route path="/users-dashboard/:order-history">
         <PurchaseHistory />
       </Route>
     </DashboardContainer>

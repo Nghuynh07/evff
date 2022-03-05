@@ -20,6 +20,19 @@ const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 //GLOABL Middleware
 const app = express();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.send('API running');
+  });
+}
+
 //For security HTTP headers
 app.use(helmet());
 // app.enable('trust proxy');
@@ -27,13 +40,6 @@ app.use(cors());
 app.options('*', cors());
 
 app.use('/public', express.static(`${__dirname}/public`));
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
-}
 
 //Development logging
 if (process.env.NODE_ENV === 'development') {

@@ -7,7 +7,7 @@ import classes from '../css-ultils/form.module.css';
 import FormLayout from '../layout/FormLayout';
 import Loading from './Loading';
 
-const URL = 'http://localhost:4000/api/v1/users/login';
+const URL = '/api/v1/users/login';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);

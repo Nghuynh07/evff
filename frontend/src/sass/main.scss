@@ -1,0 +1,342 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+//MIXINS
+@mixin displayFlex() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin small-letter-spacing() {
+  letter-spacing: 0.2rem;
+}
+
+@mixin text-uppercase {
+  text-transform: uppercase;
+}
+
+//FORM
+.form {
+  margin: auto;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+  background: #486aa9;
+  position: relative;
+}
+
+.form-layout {
+  width: 40%;
+  margin: 10vh auto;
+  display: grid;
+  grid-template-columns: minmax(40rem, 1fr);
+  grid-template-rows: minmax(min-content, 1fr);
+  justify-content: center;
+  align-content: center;
+}
+
+//BUTTON
+.signup-button,
+.signin-button {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  outline: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgb(250, 124, 78);
+  cursor: pointer;
+  @include small-letter-spacing();
+  @include text-uppercase();
+  &:hover {
+    transform: scale(0.95);
+  }
+}
+
+//ERROR
+.error {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  font-size: 1.2rem;
+  color: red;
+}
+//INPUT
+.input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  &-input {
+    font-size: 1.8rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    @include small-letter-spacing();
+  }
+  &-label {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+    @include small-letter-spacing();
+  }
+}
+//SIGN UP ACTIONS CONTAINER
+
+.signup-action-container {
+  width: 100%;
+  @include displayFlex();
+  justify-content: space-between;
+}
+
+//SIGNUP LINK
+
+.signup-link {
+  margin-top: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 500ms;
+  font-size: 1.4rem;
+  transition: all 500ms ease;
+  &:hover {
+    transform: translate(2px, 4px);
+  }
+}
+
+//NAVBAR
+.navbar {
+  height: 8vh;
+  width: 100%;
+  &-links-container {
+    width: 100%;
+    height: 8vh;
+    border: none;
+    outline: none;
+    margin: auto;
+    overflow: hidden;
+    background: #ff416c; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #ff4b2b,
+      #ff416c
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #ff4b2b,
+      #ff416c
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    @include displayFlex();
+    flex-direction: row;
+  }
+  &-link {
+    height: 100%;
+    outline: none;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    padding: 0.6rem 10rem;
+    display: flex;
+    align-items: center;
+    transition: all 500ms ease;
+    i {
+      font-size: 2rem;
+    }
+  }
+  &-link:hover {
+    transform: translateY(10px);
+    color: orangered;
+  }
+  &-logout {
+  }
+  &-cart {
+    height: 100%;
+    position: relative;
+    &-size {
+      right: 6rem;
+      top: 13px;
+      color: #fff;
+      position: absolute;
+      font-size: 1.6rem;
+      margin-left: 0.5rem;
+      background-color: #9ccc65;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      @include displayFlex();
+    }
+  }
+}
+//HEADER
+.header {
+  min-height: 92vh;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-image: url('../image/cover.jpg');
+  background-position: center 55%;
+  background-blend-mode: overlay;
+  width: 100%;
+  height: 100%;
+  @include displayFlex();
+  flex-direction: column;
+
+  &-title {
+    text-align: center;
+    font-size: 8rem;
+    text-transform: capitalize;
+    color: #fffde7;
+    position: relative;
+    font-weight: 700;
+    transition: all 500ms ease;
+  }
+
+  &-text {
+    font-size: 3rem;
+    color: #fffde7;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+  }
+}
+
+.footer {
+  height: 8vh;
+  width: 100%;
+  background-color: #212121;
+  background: #16222a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #16222a,
+    #3a6073
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #43667d,
+    #3a6073
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  overflow: hidden;
+  flex-direction: row;
+  @include displayFlex();
+  &-link {
+    height: 100%;
+    font-size: 3rem;
+    padding: 0.5rem 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    transition: all 500ms ease;
+    &:not(first-child) {
+      margin-left: 1rem;
+    }
+    &:not(last-child) {
+      margin-right: 1rem;
+    }
+    &:hover {
+      transform: translateY(-10px);
+      background: #283048;
+    }
+  }
+}
+
+// MEDIA QUERIES
+
+@media screen and (max-width: 1000px) {
+  .navbar {
+    &-link {
+      font-size: 2rem;
+      padding: 0.6rem 8rem;
+    }
+    &-cart {
+      &-size {
+        right: 4rem;
+      }
+    }
+  }
+
+  .header {
+    &-title {
+      font-size: 7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .header {
+    &-title {
+      font-size: 6rem;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .navbar {
+    &-link {
+      padding: 0.6rem 6rem;
+    }
+    &-cart {
+      &-size {
+        right: 2rem;
+      }
+    }
+  }
+  .header {
+    &-title {
+      font-size: 5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .navbar {
+    &-link {
+      padding: 0.6rem 6rem;
+    }
+    &-cart {
+      &-size {
+        right: 1rem;
+      }
+    }
+  }
+
+  .header {
+    &-text {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .navbar {
+    &-link {
+      padding: 0.6rem 4rem;
+    }
+    &-cart {
+      &-size {
+        right: 0.5rem;
+      }
+    }
+  }
+  .header {
+    &-title {
+      font-size: 4rem;
+    }
+  }
+}

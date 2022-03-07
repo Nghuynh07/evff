@@ -1,6 +1,5 @@
 import Button from './Button';
 import Input from './Input';
-import classes from '../css-ultils/form.module.css';
 import FormLayout from '../layout/FormLayout';
 import Loading from './Loading';
 import { useState, useContext } from 'react';
@@ -8,7 +7,7 @@ import { AuthContext } from '../store/auth-context';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-const URL = '/api/v1/users/signup';
+const URL = 'http://localhost:4000/api/v1/users/signup';
 const Signup = () => {
   const authContext = useContext(AuthContext);
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
@@ -83,9 +82,9 @@ const Signup = () => {
       {redirectUser()}
       <FormLayout>
         {<Loading loading={loading} error={errors} />}
-        <form onSubmit={signup} className={classes.form}>
+        <form onSubmit={signup} className="form">
           {errors.firstName ? (
-            <p className={classes.firstNameError}>{errors.firstName.message}</p>
+            <p className="firstNameError">{errors.firstName.message}</p>
           ) : (
             ''
           )}
@@ -100,7 +99,7 @@ const Signup = () => {
             onChange={handleChange}
           />
           {errors.lastName ? (
-            <p className={classes.lastNameError}>{errors.lastName.message}</p>
+            <p className="lastNameError">{errors.lastName.message}</p>
           ) : (
             ''
           )}
@@ -115,7 +114,7 @@ const Signup = () => {
             onChange={handleChange}
           />
           {errors.email ? (
-            <p className={classes.emailError}>{errors.email.message}</p>
+            <p className="emailError">{errors.email.message}</p>
           ) : (
             ''
           )}
@@ -130,7 +129,7 @@ const Signup = () => {
             onChange={handleChange}
           />
           {errors.password ? (
-            <p className={classes.passwordError}>{errors.password.message}</p>
+            <p className="passwordError">{errors.password.message}</p>
           ) : (
             ''
           )}
@@ -145,7 +144,7 @@ const Signup = () => {
             onChange={handleChange}
           />
           {errors.passwordConfirm ? (
-            <p className={classes.confirmPasswordError}>
+            <p className="confirmPasswordError">
               {errors.passwordConfirm.message}
             </p>
           ) : (
@@ -161,7 +160,9 @@ const Signup = () => {
             value={passwordConfirm}
             onChange={handleChange}
           />
-          <Button type="submit" name="Signup" />
+          <button type="submit" className="signup-button">
+            Signup
+          </button>
         </form>
       </FormLayout>
     </>

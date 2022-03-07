@@ -1,0 +1,136 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+  min-height: 85vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+}
+
+.header-top {
+  width: 100%;
+  height: calc(85vh / 2);
+  background-color: #9ccc65;
+}
+
+.header-title {
+  font-size: 8rem;
+  text-transform: capitalize;
+  color: #fffde7;
+  position: relative;
+  font-weight: 700;
+}
+
+.header-text {
+  font-size: 3rem;
+  color: #fffde7;
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+}
+
+.header-image-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.header-image {
+  width: 20%;
+  height: 90%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.navbar {
+  height: 8vh;
+  width: 100%;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-links-container {
+  width: 70%;
+  height: 8vh;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar-link {
+  height: 100%;
+  outline: none;
+  font-size: 2rem;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #474d5c;
+  padding: 0.4rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: background-color 300ms, color 300ms;
+  transition: background-color 300ms, color 300ms;
+}
+
+.navbar-link:hover {
+  background-color: lightgray;
+  color: #474d5c;
+}
+
+.navbar-cart {
+  position: relative;
+}
+
+.navbar-cart-size {
+  right: -2px;
+  top: 13px;
+  color: white;
+  position: absolute;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=main.css.map */

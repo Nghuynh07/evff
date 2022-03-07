@@ -1,5 +1,4 @@
-import classes from './Input.module.css';
-
+import '../sass/main.scss';
 const Input = ({
   htmlFor,
   label,
@@ -8,17 +7,18 @@ const Input = ({
   placeholder,
   value,
   onChange,
-  errorClass,
   error = false,
   errorMessage,
   name,
 }) => {
   return (
-    <div>
-      <p className={errorClass}>{error ? errorMessage : ''}</p>
-      <label htmlFor={htmlFor}>{label}</label>
+    <div className="input">
+      <p className="error">{error ? errorMessage : ''}</p>
+      <label htmlFor={htmlFor} className="input-label">
+        {label}
+      </label>
       <input
-        className={classes.input}
+        className="input-input"
         type={type}
         id={id}
         placeholder={placeholder}

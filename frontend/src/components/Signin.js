@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import '../sass/main.scss';
 import Input from './Input';
 import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
@@ -7,7 +8,7 @@ import classes from '../css-ultils/form.module.css';
 import FormLayout from '../layout/FormLayout';
 import Loading from './Loading';
 
-const URL = '/api/v1/users/login';
+const URL = 'http://localhost:4000/api/v1/users/login';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
@@ -80,7 +81,7 @@ const Signin = () => {
       {redirectUser()}
       {success && <p>Logging in...</p>}
       <Loading loading={loading} error={error} />
-      <form className={classes.form} onSubmit={loginSubmitHandler}>
+      <form className="form" onSubmit={loginSubmitHandler}>
         <Input
           errorClass={classes.error}
           error={error}
@@ -104,15 +105,15 @@ const Signin = () => {
           value={password}
           onChange={inputHandler}
         />
-        <div>
+        <div className="signup-action-container">
           <button
-            className={classes.button}
+            className="signin-button"
             type="submit"
             onClick={authContext.logout}
           >
             Login
           </button>
-          <Link className={classes.signupLink} to="/signup">
+          <Link className="signup-link" to="/signup">
             New User?
           </Link>
         </div>

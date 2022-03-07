@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../store/auth-context";
-import { listOrders } from "./apiAdmin";
-import classes from "./Orders.module.css";
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../store/auth-context';
+import { listOrders } from './apiAdmin';
+import classes from './Orders.module.css';
 
 const Orders = () => {
   const auth = useContext(AuthContext);
@@ -20,12 +20,12 @@ const Orders = () => {
   const showOrdersLength = () => {
     if (orders.length > 0) {
       return (
-        <h1 style={{ margin: "auto" }} className='text-danger display-2'>
+        <h1 style={{ margin: 'auto' }} className="text-danger display-2">
           Total Orders: {orders.length}
         </h1>
       );
     } else {
-      return <h1 className='text-danger'>No Order</h1>;
+      return <h1 className="text-danger">No Order</h1>;
     }
   };
   return (
@@ -51,7 +51,7 @@ const Orders = () => {
               </div>
             </div>
           ))}
-          <h1 style={{ marginTop: "1rem" }}>
+          <h1 style={{ marginTop: '1rem' }}>
             Total Order Amount: {order.amount.toFixed(2)}
           </h1>
         </div>

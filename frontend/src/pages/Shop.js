@@ -7,8 +7,15 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    const res = await axios.get(`/api/v1/products`);
-    setProducts(res.data.data.doc);
+    try {
+      const res = await axios.get(`/api/v1/products`, {
+        withCredentials: true,
+      });
+      console.log(res);
+      setProducts(res.data.data.doc);
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     getProducts();

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthContext } from '../store/auth-context';
 import { itemTotal } from '../cart/cart-helper';
+
 const Navbar = () => {
   const authContext = useContext(AuthContext);
 
@@ -13,11 +14,11 @@ const Navbar = () => {
     <header className="navbar">
       <div className="navbar-links-container">
         <Link className="navbar-link" to="/home">
-          <i class="fa-solid fa-house "></i>
+          Home
         </Link>
 
         <Link className="navbar-link" to="/shop">
-          <i class="fa-solid fa-shop"></i>
+          shop
         </Link>
 
         {!authContext.isLoggedIn && (
@@ -36,14 +37,14 @@ const Navbar = () => {
         authContext.isAuthenticated() &&
         authContext.isAuthenticated().data.data.user.role === 'wholesale' ? (
           <Link className="navbar-link" to="/wholesale-dashboard">
-            <i class="fa-solid fa-user"></i>
+            Dashboard
           </Link>
         ) : null}
         {authContext.isLoggedIn &&
         authContext.isAuthenticated() &&
         authContext.isAuthenticated().data.data.user.role === 'admin' ? (
           <Link className="navbar-link" to="/admin-dashboard">
-            <i class="fa-solid fa-user"></i>
+            Dashboard
           </Link>
         ) : null}
         {authContext.isLoggedIn && (
@@ -55,7 +56,7 @@ const Navbar = () => {
         )}
         <div className="navbar-cart">
           <Link className="navbar-link" to="/cart">
-            <i class="fa-solid fa-cart-shopping"></i>
+            cart
           </Link>
           <span className="navbar-cart-size">{itemTotal()}</span>
         </div>

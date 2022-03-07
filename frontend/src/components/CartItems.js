@@ -1,18 +1,18 @@
-import ShowImage from "./ShowImage";
-import classes from "./CartItems.module.css";
+import ShowImage from './ShowImage';
+import classes from './CartItems.module.css';
 import {
   removeItem,
   subtractProductFromCart,
   increaseExistingProductInCart,
-} from "../cart/cart-helper";
+} from '../cart/cart-helper';
 
 const CartItems = ({ item, setRun = (f) => f, run }) => {
   return (
-    <div className={classes.cartItems}>
-      <ShowImage photo={item.photo} imageStyle={classes.cartItemsImage} />
+    <div className="cart-items">
+      <ShowImage photo={item.photo} imageStyle="cart-items-image" />
       <div>
-        <h1>{item.name}</h1>
-        <h6>Price: ${item.price} / (1.ct)</h6>
+        <h1 className="cart-items-name">{item.name}</h1>
+        <h6 className="cart-items-price">Price: ${item.price} / (1.ct)</h6>
         <h6>
           Total: ${item.totalPrice.toFixed(2)} / ({item.count}.ct)
         </h6>

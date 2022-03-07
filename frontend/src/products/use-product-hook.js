@@ -1,18 +1,18 @@
-import { useState, useContext, useCallback } from "react";
-import { AuthContext } from "../store/auth-context";
+import { useState, useContext, useCallback } from 'react';
+import { AuthContext } from '../store/auth-context';
 
 export const useProduct = (createProduct) => {
   const auth = useContext(AuthContext);
-
   const [product, setProduct] = useState({
-    name: "",
-    price: "",
-    photo: "",
-    packaging: "",
-    category: "",
+    name: '',
+    price: '',
+    photo: '',
+    packaging: '',
+    category: '',
     success: false,
     loading: false,
-    formData: "",
+    error: '',
+    formData: '',
   });
 
   const {
@@ -20,12 +20,12 @@ export const useProduct = (createProduct) => {
   } = auth.isAuthenticated();
 
   const categories = [
-    "Fruits",
-    "Vegetables",
-    "Herbs",
-    "Eggs",
-    "Dairy",
-    "Poultry",
+    'Fruits',
+    'Vegetables',
+    'Herbs',
+    'Eggs',
+    'Dairy',
+    'Poultry',
   ];
 
   const { formData } = product;
@@ -33,7 +33,7 @@ export const useProduct = (createProduct) => {
   const inputChangeHandler = useCallback(
     (event) => {
       let value =
-        event.target.name === "photo"
+        event.target.name === 'photo'
           ? event.target.files[0]
           : event.target.value;
       formData.set(event.target.name, value);
@@ -55,7 +55,7 @@ export const useProduct = (createProduct) => {
       })
       .catch((err) => {
         setProduct({ ...product, loading: false, success: false });
-        console.log(err.response);
+        console.log(err.response.data);
       });
   };
 

@@ -1,4 +1,3 @@
-import '../sass/main.scss';
 const Input = ({
   htmlFor,
   label,
@@ -7,13 +6,10 @@ const Input = ({
   placeholder,
   value,
   onChange,
-  error = false,
-  errorMessage,
   name,
 }) => {
   return (
     <div className="input">
-      <p className="error">{error ? errorMessage : ''}</p>
       <label htmlFor={htmlFor} className="input-label">
         {label}
       </label>

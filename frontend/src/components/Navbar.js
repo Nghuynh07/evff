@@ -1,4 +1,3 @@
-import '../sass/main.scss';
 import React, { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthContext } from '../store/auth-context';
@@ -44,12 +43,14 @@ const Navbar = () => {
         authContext.isAuthenticated() &&
         authContext.isAuthenticated().data.data.user.role === 'admin' ? (
           <Link className="navbar-link" to="/admin-dashboard">
-            Dashboard
+            <i class="fa-solid fa-user"></i>
           </Link>
         ) : null}
         {authContext.isLoggedIn && (
           <li className="navbar-link">
-            <span onClick={authContext.logout}>logout</span>
+            <span onClick={authContext.logout} className="navbar-logout">
+              logout
+            </span>
           </li>
         )}
         <div className="navbar-cart">

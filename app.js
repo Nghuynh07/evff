@@ -37,6 +37,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use('/public', express.static('public'));
+
 //For security HTTP headers
 app.use(helmet());
 // app.enable('trust proxy');

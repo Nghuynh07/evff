@@ -1,9 +1,9 @@
-import React from "react";
-import Card from "../components/Card";
-import classes from "./Product.module.css";
-import ShowImage from "../components/ShowImage";
-import { addItem } from "../cart/cart-helper";
-import Button from "../components/Button";
+import React from 'react';
+import Card from '../components/Card';
+import classes from './Product.module.css';
+import ShowImage from '../components/ShowImage';
+import { addItem } from '../cart/cart-helper';
+import Button from '../components/Button';
 
 const Product = ({ product }) => {
   const { photo, name, price, packaging } = product;
@@ -21,7 +21,7 @@ const Product = ({ product }) => {
           ${price}/{packaging}
         </h4>
       </div>
-      <Button onClick={addItemToCart} name='ADD TO CART' type='button' />
+      <Button onClick={addItemToCart} name="ADD TO CART" type="button" />
     </Card>
   );
 };

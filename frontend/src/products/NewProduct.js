@@ -1,32 +1,26 @@
 import React, { useEffect } from 'react';
 import Input from '../components/Input';
 import { useProduct } from './use-product-hook';
-import Button from '../components/Button';
 import { createProduct } from './product-api';
-import classes from '../css-ultils/form.module.css';
+import FormLayout from '../layout/FormLayout';
 const NewProduct = () => {
   const { product, categories, inputChangeHandler, onSubmit, setProduct } =
     useProduct(createProduct);
-
-  const { name, price, packaging, category, success, formData } = product;
-
   useEffect(() => {
     setProduct({ ...product, formData: new FormData() });
   }, []);
 
   return (
-    <>
-      {success && <p>Product Created</p>}
-
-      <form className={classes.form} onSubmit={onSubmit}>
-        <h2>New Product</h2>
+    <FormLayout>
+      <form className="form" onSubmit={onSubmit}>
+        <h2 className="form-title">New Product</h2>
         <div>
-          <label>
+          <label className="form-label">
             <input
               accept="image/*"
               type="file"
               name="photo"
-              className="form-control"
+              className="input-input"
               onChange={inputChangeHandler}
             />
           </label>
@@ -37,7 +31,6 @@ const NewProduct = () => {
           name="name"
           for="name"
           id="name"
-          // value={name}
           onChange={inputChangeHandler}
         />
 
@@ -47,7 +40,6 @@ const NewProduct = () => {
           name="price"
           for="price"
           id="price"
-          // value={price}
           onChange={inputChangeHandler}
         />
 
@@ -57,17 +49,16 @@ const NewProduct = () => {
           name="packaging"
           for="packaging"
           id="packaging"
-          // value={packaging}
           onChange={inputChangeHandler}
         />
-        <div>
-          <label>Category</label>
-          <select name="category">
-            <option value=""></option>
+        <div className="form-category">
+          <label className="form-category-label">Category</label>
+          <select name="category" className="form-category-select">
+            <option value="" className="form-category-option"></option>
             {categories.map((cat, index) => (
               <option
                 key={index}
-                // value={category}
+                className="form-category-option"
                 onChange={(event) => inputChangeHandler(event)}
               >
                 {cat}
@@ -75,9 +66,11 @@ const NewProduct = () => {
             ))}
           </select>
         </div>
-        <Button name="add product" type="submit" />
+        <button className="form-add-production-button" type="submit">
+          Add Product
+        </button>
       </form>
-    </>
+    </FormLayout>
   );
 };
 

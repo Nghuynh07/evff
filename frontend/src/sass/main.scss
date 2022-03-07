@@ -1,17 +1,14 @@
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
+//VARIABLES
 
-html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-}
+$color-light-gray: #cfd8dc;
+$color-dark-gray: #212121;
+$regular-text-color: #263238;
+
+$regular-font-size: 1.6rem;
+
+$transition: all 500ms ease;
+$letter-spacing: 0.2rem;
+
 //MIXINS
 @mixin displayFlex() {
   display: flex;
@@ -27,6 +24,53 @@ html {
   text-transform: uppercase;
 }
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: $letter-spacing;
+}
+
+//DASHBOARD CONTAINER
+.dashboard-container {
+  width: 80vw;
+  margin: 5vh auto;
+  display: grid;
+  grid-row-gap: 2rem;
+  grid-template-columns: minmax(35rem, 1fr);
+}
+
+//CART CONTAINER
+.cart-container {
+  width: 80vw;
+  margin: 10vh auto;
+  padding: 2rem;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 4rem;
+}
+
+//PRODUCTS CONTAINER
+.products-container {
+  width: 98%;
+  padding: 1rem;
+  margin: 2vh auto;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 2rem;
+  align-content: center;
+}
 //FORM
 .form {
   margin: auto;
@@ -35,8 +79,42 @@ html {
   position: relative;
   border-radius: 10px;
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
-  background: #486aa9;
   position: relative;
+  &-title {
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    color: $color-light-gray;
+  }
+  &-category {
+    @include displayFlex();
+    flex-direction: column;
+    align-items: flex-start;
+    &-select {
+      width: 100%;
+      font-size: 1.8rem;
+      padding: 1rem;
+      border-radius: 5px;
+      outline: none;
+      margin-bottom: 1.5rem;
+      border: 1px solid transparent;
+      opacity: 0.9;
+      background-color: $color-light-gray;
+      @include small-letter-spacing();
+    }
+    &-label {
+      color: #263238;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.5;
+      @include small-letter-spacing();
+    }
+  }
+}
+
+select {
+  appearance: none;
+  border: none;
+  outline: none;
 }
 
 .form-layout {
@@ -51,30 +129,51 @@ html {
 
 //BUTTON
 .signup-button,
-.signin-button {
+.signin-button,
+.checkout-button,
+.form-add-production-button {
   border: none;
   outline: none;
   border-radius: 5px;
   padding: 1rem 2rem;
   outline: none;
+  color: $color-light-gray;
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: rgb(250, 124, 78);
+  background-color: #448aff;
+  transition: $transition;
   cursor: pointer;
   @include small-letter-spacing();
   @include text-uppercase();
   &:hover {
-    transform: scale(0.95);
+    background-color: $color-light-gray;
+    color: #448aff;
+  }
+  &:active {
+    scale: 0.95;
   }
 }
 
 //ERROR
-.error {
+.error-signin,
+.error-signup {
   position: absolute;
-  right: 0px;
-  top: 10px;
+  right: 2rem;
+  top: 2rem;
   font-size: 1.2rem;
+  color: salmon;
+}
+
+.firstNameError,
+.lastNameError,
+.emailError,
+.passwordError,
+.confirmPasswordError {
+  position: absolute;
+  display: inline-block;
+  right: 2.2rem;
   color: red;
+  font-size: 1.2rem;
 }
 //INPUT
 .input {
@@ -84,16 +183,20 @@ html {
   &-input {
     font-size: 1.8rem;
     padding: 1rem;
-    border: none;
     border-radius: 5px;
     outline: none;
     display: inline-block;
     margin-bottom: 1.5rem;
+    border: 1px solid transparent;
     opacity: 0.9;
+    background-color: $color-light-gray;
     @include small-letter-spacing();
+    &:focus {
+      border: 1px solid #ff416c;
+    }
   }
   &-label {
-    color: #fff;
+    color: #263238;
     font-size: 2rem;
     margin-bottom: 0.5rem;
     opacity: 0.5;
@@ -110,13 +213,14 @@ html {
 
 //SIGNUP LINK
 
-.signup-link {
+.signup-link,
+.signup-link:visited,
+.signup-link:active {
   margin-top: 0.5rem;
   text-decoration: none;
-  color: #fff;
-  transition: transform 500ms;
-  font-size: 1.4rem;
-  transition: all 500ms ease;
+  color: $regular-text-color;
+  font-size: $regular-font-size;
+  transition: $transition;
   &:hover {
     transform: translate(2px, 4px);
   }
@@ -155,9 +259,8 @@ html {
     text-decoration: none;
     color: #fff;
     padding: 0.6rem 10rem;
-    display: flex;
-    align-items: center;
-    transition: all 500ms ease;
+    @include displayFlex();
+    transition: $transition;
     i {
       font-size: 2rem;
     }
@@ -167,6 +270,7 @@ html {
     color: orangered;
   }
   &-logout {
+    cursor: pointer;
   }
   &-cart {
     height: 100%;
@@ -176,7 +280,7 @@ html {
       top: 13px;
       color: #fff;
       position: absolute;
-      font-size: 1.6rem;
+      font-size: $regular-font-size;
       margin-left: 0.5rem;
       background-color: #9ccc65;
       width: 30px;
@@ -217,46 +321,112 @@ html {
   }
 }
 
-.footer {
-  height: 8vh;
-  width: 100%;
-  background-color: #212121;
-  background: #16222a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #16222a,
-    #3a6073
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #43667d,
-    #3a6073
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  overflow: hidden;
-  flex-direction: row;
-  @include displayFlex();
-  &-link {
-    height: 100%;
-    font-size: 3rem;
-    padding: 0.5rem 2rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    transition: all 500ms ease;
+//CART ITEMS
+
+//CHECK OUT
+.checkout {
+  padding: 2rem;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  &-address {
+    @include displayFlex();
+    flex-direction: column;
+  }
+  &-container {
+    width: 100%;
+    min-height: 10vh;
+    padding: 1rem;
+    @include displayFlex();
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  &-is-submitted {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
     &:not(first-child) {
-      margin-left: 1rem;
+      margin-bottom: 1rem;
     }
-    &:not(last-child) {
-      margin-right: 1rem;
-    }
-    &:hover {
-      transform: translateY(-10px);
-      background: #283048;
-    }
+  }
+  &-quantity {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #1b5e20;
+  }
+  &-total {
+    text-decoration: uppercase;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  &-textarea {
+    width: 100%;
+    padding: 2rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    resize: none;
+    letter-spacing: $letter-spacing;
+    color: $color-dark-gray;
+    font-size: $regular-font-size;
   }
 }
 
+//CART
+
+.cart {
+  width: 100%;
+  height: 60vh;
+  background-color: rgba(0, 0, 0, 0.1);
+  background-attachment: scroll fixed;
+  border-radius: 5px;
+  padding: 0.5rem;
+  overflow-y: scroll;
+}
+
+// .footer {
+//   height: 8vh;
+//   width: 100%;
+//   background-color: #212121;
+//   background: #16222a; /* fallback for old browsers */
+//   background: -webkit-linear-gradient(
+//     to right,
+//     #16222a,
+//     #3a6073
+//   ); /* Chrome 10-25, Safari 5.1-6 */
+//   background: linear-gradient(
+//     to right,
+//     #43667d,
+//     #3a6073
+//   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+//   overflow: hidden;
+//   flex-direction: row;
+//   @include displayFlex();
+//   &-link {
+//     height: 100%;
+//     font-size: 3rem;
+//     padding: 0.5rem 2rem;
+//     color: #fff;
+//     display: flex;
+//     align-items: center;
+//     transition: all 500ms ease;
+//     &:not(first-child) {
+//       margin-left: 1rem;
+//     }
+//     &:not(last-child) {
+//       margin-right: 1rem;
+//     }
+//     &:hover {
+//       transform: translateY(-10px);
+//       background: #283048;
+//     }
+//   }
+// }
+
 // MEDIA QUERIES
+
+@media screen and (min-width: 1000px) {
+}
 
 @media screen and (max-width: 1000px) {
   .navbar {

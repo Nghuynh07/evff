@@ -1,5 +1,3 @@
-import React from 'react';
-import '../sass/main.scss';
 const Home = () => {
   return (
     <header className="header">

@@ -1,7 +1,5 @@
-import Button from './Button';
 import Input from './Input';
 import FormLayout from '../layout/FormLayout';
-import Loading from './Loading';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import axios from 'axios';
@@ -39,6 +37,11 @@ const Signup = () => {
 
   const signup = async (event) => {
     event.preventDefault();
+
+    if (password.length < 8 && passwordConfirm.length < 8) {
+      setErrors('At least character is required');
+    }
+
     setData({ ...data, loading: true });
     try {
       const res = await axios.post(URL, data);
@@ -59,8 +62,9 @@ const Signup = () => {
         passwordConfirm: '',
       });
     } catch (err) {
-      console.log(err);
-      setErrors(err.response.data.error.errors);
+      if (err) {
+        setErrors('Please fill out all fields');
+      }
     }
   };
 
@@ -81,82 +85,50 @@ const Signup = () => {
     <>
       {redirectUser()}
       <FormLayout>
-        {<Loading loading={loading} error={errors} />}
         <form onSubmit={signup} className="form">
-          {errors.firstName ? (
-            <p className="firstNameError">{errors.firstName.message}</p>
-          ) : (
-            ''
-          )}
+          {errors && <p class="error-signup">{errors}</p>}
           <Input
             htmlFor="firstName"
             label="First name"
             type="text"
             id="firstName"
             name="firstName"
-            placeholder="first name..."
             value={firstName}
             onChange={handleChange}
           />
-          {errors.lastName ? (
-            <p className="lastNameError">{errors.lastName.message}</p>
-          ) : (
-            ''
-          )}
           <Input
             htmlFor="lastName"
             label="Last name"
             type="text"
             id="lastName"
             name="lastName"
-            placeholder="last name..."
             value={lastName}
             onChange={handleChange}
           />
-          {errors.email ? (
-            <p className="emailError">{errors.email.message}</p>
-          ) : (
-            ''
-          )}
           <Input
             htmlFor="email"
             label="Email"
             type="email"
             id="email"
             name="email"
-            placeholder="email..."
             value={email}
             onChange={handleChange}
           />
-          {errors.password ? (
-            <p className="passwordError">{errors.password.message}</p>
-          ) : (
-            ''
-          )}
           <Input
             htmlFor="password"
             label="Password"
             type="password"
             id="password"
             name="password"
-            placeholder="password..."
             value={password}
             onChange={handleChange}
           />
-          {errors.passwordConfirm ? (
-            <p className="confirmPasswordError">
-              {errors.passwordConfirm.message}
-            </p>
-          ) : (
-            ''
-          )}
           <Input
             htmlFor="passwordConfirm"
             label="Password Confirm"
             type="password"
             id="passwordConfirm"
             name="passwordConfirm"
-            placeholder="password confirm...."
             value={passwordConfirm}
             onChange={handleChange}
           />

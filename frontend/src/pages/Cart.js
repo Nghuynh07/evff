@@ -1,9 +1,8 @@
-import CartContainer from "../layout/CartContainer";
-import CartItems from "../components/CartItems";
-import Checkout from "../components/Checkout";
-import { useEffect, useState } from "react";
-import { getCart, itemTotal } from "../cart/cart-helper";
-import classes from "./Cart.module.css";
+import CartContainer from '../layout/CartContainer';
+import CartItems from '../components/CartItems';
+import Checkout from '../components/Checkout';
+import { useEffect, useState } from 'react';
+import { getCart, itemTotal } from '../cart/cart-helper';
 const Cart = () => {
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
@@ -27,7 +26,7 @@ const Cart = () => {
         setRun={setRun}
         total={total}
       />
-      <div className={classes.cartItems}>
+      <div className="cart">
         {items &&
           items.map((item) => (
             <CartItems

@@ -1,7 +1,5 @@
-import classes from "./DashboardContainer.module.css";
-
 const DashboardContainer = ({ children }) => {
-  return <div className={classes.dashboardContainer}>{children}</div>;
+  return <div className="dashboard-container">{children}</div>;
 };
 
 export default DashboardContainer;

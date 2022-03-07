@@ -7,7 +7,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    const res = await axios.get(`/api/v1/products`);
+    const res = await axios.get(`http://localhost:4000/api/v1/products`);
     setProducts(res.data.data.doc);
   };
   useEffect(() => {

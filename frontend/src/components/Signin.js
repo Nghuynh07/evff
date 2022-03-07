@@ -1,20 +1,15 @@
 import React, { useState, useContext } from 'react';
-import '../sass/main.scss';
 import Input from './Input';
 import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
 import { Link, Redirect } from 'react-router-dom';
-import classes from '../css-ultils/form.module.css';
 import FormLayout from '../layout/FormLayout';
-import Loading from './Loading';
 
 const URL = 'http://localhost:4000/api/v1/users/login';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
-
   const authContext = useContext(AuthContext);
-
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -79,19 +74,14 @@ const Signin = () => {
   return (
     <FormLayout>
       {redirectUser()}
-      {success && <p>Logging in...</p>}
-      <Loading loading={loading} error={error} />
       <form className="form" onSubmit={loginSubmitHandler}>
+        {error && <p className="error-signin">{error}</p>}
         <Input
-          errorClass={classes.error}
-          error={error}
-          errorMessage={error}
           htmlFor="email"
           label="Email"
           type="email"
           id="email"
           name="email"
-          placeholder="email..."
           value={email}
           onChange={inputHandler}
         />
@@ -101,7 +91,6 @@ const Signin = () => {
           type="password"
           id="password"
           name="password"
-          placeholder="password..."
           value={password}
           onChange={inputHandler}
         />

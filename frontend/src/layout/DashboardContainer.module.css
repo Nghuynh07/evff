@@ -1,8 +1,0 @@
-.dashboardContainer {
-  width: 80vw;
-  margin: 5vh auto;
-
-  display: grid;
-  grid-row-gap: 2rem;
-  grid-template-columns: minmax(35rem, 1fr);
-}

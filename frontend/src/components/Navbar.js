@@ -2,6 +2,15 @@ import React, { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthContext } from '../store/auth-context';
 import { itemTotal } from '../cart/cart-helper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHouseChimney,
+  faShop,
+  faCartShopping,
+  faUser,
+  faUnlock,
+  faLock,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
@@ -14,49 +23,50 @@ const Navbar = () => {
     <header className="navbar">
       <div className="navbar-links-container">
         <Link className="navbar-link" to="/home">
-          Home
+          <FontAwesomeIcon icon={faHouseChimney} />
         </Link>
 
         <Link className="navbar-link" to="/shop">
-          shop
+          <FontAwesomeIcon icon={faShop} />
         </Link>
 
         {!authContext.isLoggedIn && (
           <Link className="navbar-link" to="/login">
-            login
+            <FontAwesomeIcon icon={faUnlock} />
           </Link>
         )}
         {authContext.isLoggedIn &&
         authContext.isAuthenticated() &&
         authContext.isAuthenticated().data.data.user.role === 'user' ? (
           <Link className="navbar-link" to="/users-dashboard">
-            <i class="fa-solid fa-user"></i>
+            <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
         {authContext.isLoggedIn &&
         authContext.isAuthenticated() &&
         authContext.isAuthenticated().data.data.user.role === 'wholesale' ? (
           <Link className="navbar-link" to="/wholesale-dashboard">
-            Dashboard
+            <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
         {authContext.isLoggedIn &&
         authContext.isAuthenticated() &&
         authContext.isAuthenticated().data.data.user.role === 'admin' ? (
           <Link className="navbar-link" to="/admin-dashboard">
-            Dashboard
+            <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
         {authContext.isLoggedIn && (
-          <li className="navbar-link">
-            <span onClick={authContext.logout} className="navbar-logout">
-              logout
-            </span>
-          </li>
+          <span
+            onClick={authContext.logout}
+            className="navbar-link navbar-logout"
+          >
+            <FontAwesomeIcon icon={faLock} />
+          </span>
         )}
         <div className="navbar-cart">
           <Link className="navbar-link" to="/cart">
-            cart
+            <FontAwesomeIcon icon={faCartShopping} />
           </Link>
           <span className="navbar-cart-size">{itemTotal()}</span>
         </div>

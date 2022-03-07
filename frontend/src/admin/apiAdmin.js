@@ -1,11 +1,18 @@
 import axios from 'axios';
 
 export const getProducts = async () => {
-  return await axios.get(`/api/v1/products`);
+  return await axios(`http://localhost:4000/api/v1/products`, {
+    method: `GET`,
+    headers: {
+      Accept: 'application/json',
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': true,
+    },
+  });
 };
 
 export const listOrders = async (token) => {
-  return await axios(`/api/v1/orders`, {
+  return await axios(`http://localhost:4000/api/v1/orders`, {
     method: `GET`,
     headers: {
       Accept: 'application/json',
@@ -17,7 +24,7 @@ export const listOrders = async (token) => {
 };
 
 export const deleteProduct = async (token, productID) => {
-  return await axios(`/api/v1/products/${productID}`, {
+  return await axios(`http://localhost:4000/api/v1/products/${productID}`, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json',

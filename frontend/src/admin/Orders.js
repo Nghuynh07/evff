@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import { listOrders } from './apiAdmin';
-import classes from './Orders.module.css';
 
 const Orders = () => {
   const auth = useContext(AuthContext);
@@ -32,28 +31,34 @@ const Orders = () => {
     <>
       {showOrdersLength()}
       {orders.map((order) => (
-        <div key={order._id} className={classes.orders}>
-          <h1>Order ID: {order._id}</h1>
-          <ul>
-            <li>
+        <div key={order._id} className="orders">
+          <div className="orders-info">
+            <h1 className="orders-id">Order ID: {order._id}</h1>
+            <p className="orders-name">
               Customer:{order.user.firstName} {order.user.lastName}
-            </li>
-            <li>Address: {order.address}</li>
-          </ul>
-          <h3>Total Product(s) in the order: {order.products.length}</h3>
+            </p>
+            <p className="orders-address">Address: {order.address}</p>
+            <h2 className="orders-length">
+              Total Product(s) in the order: {order.products.length}
+            </h2>
+          </div>
           {order.products.map((product) => (
-            <div key={product._id}>
-              <div className={classes.orderProductsInfoContainer}>
-                <h4>Product: {product.name}</h4>
-                <h4>Price: {product.price}/count</h4>
-                <h4>Count: {product.count}</h4>
-                <h4>Total ${product.count * product.price}</h4>
-              </div>
+            <div className="orders-product-info" key={product._id}>
+              <h3 className="orders-product-info-text">
+                Product: {product.name}
+              </h3>
+              <h4 className="orders-product-info-text">
+                Price: {product.price}/count
+              </h4>
+              <h4 className="orders-product-info-text">
+                Count: {product.count}
+              </h4>
+              <h4 className="orders-product-info-text">
+                Total ${product.count * product.price}
+              </h4>
             </div>
           ))}
-          <h1 style={{ marginTop: '1rem' }}>
-            Total Order Amount: {order.amount.toFixed(2)}
-          </h1>
+          <h1 className="orders-total">Total: {order.amount.toFixed(2)}</h1>
         </div>
       ))}
     </>

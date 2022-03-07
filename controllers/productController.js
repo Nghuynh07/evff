@@ -3,10 +3,7 @@ const Product = require('./../models/productModel');
 const multer = require('multer');
 const sharp = require('sharp');
 const catchAsync = require('./../utils/catchAsync');
-// const formidable = require('formidable');
-const _ = require('lodash');
 const multerStorage = multer.memoryStorage();
-// const fs = require('fs');
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -20,17 +17,12 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
-// exports.productPhotoUpload = upload.single('photo');
 
 exports.productPhotoUpload = upload.single('photo');
-
-//upload.fields()
-//upload.array()
 
 exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  // console.log(req);
   req.body.photo = `product-${req.body.name}-${Date.now()}.jpeg`;
 
   await sharp(req.file.buffer)
@@ -41,14 +33,6 @@ exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
 
   next();
 });
-
-// exports.getProductCategory = async (req, res) => {
-//   try {
-//     await res.json(Product.schema.path('category').enumValues);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
 exports.getAllProducts = globalHandlers.getAll(Product);
 exports.createProduct = globalHandlers.createOne(Product);

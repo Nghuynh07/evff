@@ -1,14 +1,13 @@
-import { useContext } from "react";
-import DashboardContainer from "../layout/DashboardContainer";
-import { Link } from "react-router-dom";
-import classes from "./AdminDashboard.module.css";
-import { AuthContext } from "../store/auth-context";
-import { Route } from "react-router-dom";
-import Orders from "./Orders";
-import NewProduct from "../products/NewProduct";
-import ViewProducts from "./ViewProducts";
-import UpdatePassword from "../users/UpdatePassword";
-import UpdateProfile from "../users/UpdateProfile";
+import { useContext } from 'react';
+import DashboardContainer from '../layout/DashboardContainer';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../store/auth-context';
+import { Route } from 'react-router-dom';
+import Orders from './Orders';
+import NewProduct from '../products/NewProduct';
+import ViewProducts from './ViewProducts';
+import UpdatePassword from '../users/UpdatePassword';
+import UpdateProfile from '../users/UpdateProfile';
 const AdminDashboard = () => {
   const auth = useContext(AuthContext);
   const {
@@ -21,29 +20,32 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <ul className={classes.adminDashboard}>
-        <li>
-          <Link className={classes.link} to='/admin-dashboard/update-profile'>
+      <ul className="dashboard">
+        <li className="dashboard-item">
+          <Link className="dashboard-link" to="/admin-dashboard/update-profile">
             Update Profile
           </Link>
         </li>
-        <li>
-          <Link className={classes.link} to='/admin-dashboard/update-password'>
+        <li className="dashboard-item">
+          <Link
+            className="dashboard-link"
+            to="/admin-dashboard/update-password"
+          >
             Update Password
           </Link>
         </li>
-        <li>
-          <Link className={classes.link} to='/admin-dashboard/new-product'>
+        <li className="dashboard-item">
+          <Link className="dashboard-link" to="/admin-dashboard/new-product">
             Add Product
           </Link>
         </li>
-        <li>
-          <Link className={classes.link} to='/admin-dashboard/view-products'>
+        <li className="dashboard-item">
+          <Link className="dashboard-link" to="/admin-dashboard/view-products">
             View Products
           </Link>
         </li>
-        <li>
-          <Link className={classes.link} to='/admin-dashboard/view-orders'>
+        <li className="dashboard-item">
+          <Link className="dashboard-link" to="/admin-dashboard/view-orders">
             View Orders
           </Link>
         </li>
@@ -53,13 +55,17 @@ const AdminDashboard = () => {
 
   const adminInfo = () => {
     return (
-      <div className={classes.adminInfo}>
-        <h3>{role.charAt(0).toUpperCase() + role.slice(1)} Information</h3>
-        <ul>
-          <li>First Name: {firstName}</li>
-          <li>Last Name: {lastName}</li>
-          <li>Email: {email}</li>
-          <li>Role: {role}</li>
+      <div className="dashboard-info">
+        <h3 className="dashboard-info__role">
+          {role.charAt(0).toUpperCase() + role.slice(1)} Information
+        </h3>
+        <ul className="dashboard-info__list">
+          <li className="dashboard-info__list--item">
+            First Name: {firstName}
+          </li>
+          <li className="dashboard-info__list--item">Last Name: {lastName}</li>
+          <li className="dashboard-info__list--item">Email: {email}</li>
+          <li className="dashboard-info__list--item">Role: {role}</li>
         </ul>
       </div>
     );
@@ -69,19 +75,19 @@ const AdminDashboard = () => {
     <DashboardContainer>
       {adminLinks()}
       {adminInfo()}
-      <Route path='/admin-dashboard/:view-orders'>
+      <Route path="/admin-dashboard/:view-orders">
         <Orders />
       </Route>
-      <Route path='/admin-dashboard/:new-product'>
+      <Route path="/admin-dashboard/:new-product">
         <NewProduct />
       </Route>
-      <Route path='/admin-dashboard/:view-products'>
+      <Route path="/admin-dashboard/:view-products">
         <ViewProducts />
       </Route>
-      <Route path='/admin-dashboard/:update-password'>
+      <Route path="/admin-dashboard/:update-password">
         <UpdatePassword />
       </Route>
-      <Route path='/admin-dashboard/:update-profile'>
+      <Route path="/admin-dashboard/:update-profile">
         <UpdateProfile />
       </Route>
     </DashboardContainer>

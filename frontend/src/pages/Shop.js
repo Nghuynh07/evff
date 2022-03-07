@@ -8,13 +8,10 @@ const Shop = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get(`/api/v1/products`, {
-        withCredentials: true,
-      });
-      console.log(res);
-      setProducts(res.data.data.doc);
+      const res = await axios.get(`http://localhost:4000/api/v1/products`);
+      setProducts(res.data.data);
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
     }
   };
   useEffect(() => {

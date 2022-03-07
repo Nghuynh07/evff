@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import Button from '../components/Button';
 import { AuthContext } from '../store/auth-context';
 import { Link } from 'react-router-dom';
 import { createOrder } from '../cart/cart-api';

@@ -1,9 +1,11 @@
 import React from 'react';
-import Card from '../components/Card';
-import classes from './Product.module.css';
+
 import ShowImage from '../components/ShowImage';
 import { addItem } from '../cart/cart-helper';
-import Button from '../components/Button';
+
+const Card = ({ children }) => {
+  return <div className="card">{children}</div>;
+};
 
 const Product = ({ product }) => {
   const { photo, name, price, packaging } = product;
@@ -14,14 +16,16 @@ const Product = ({ product }) => {
 
   return (
     <Card>
-      <ShowImage photo={photo} imageStyle={classes.product} />
-      <div className={classes.productInfo}>
-        <h2 className={classes.productName}>{name}</h2>
-        <h4 className={classes.productPrice}>
+      <ShowImage photo={photo} imageStyle="product" />
+      <div className="product-info">
+        <h2 className="product-name">{name}</h2>
+        <h4 className="product-price">
           ${price}/{packaging}
         </h4>
       </div>
-      <Button onClick={addItemToCart} name="ADD TO CART" type="button" />
+      <button onClick={addItemToCart} className="product-button">
+        add to cart
+      </button>
     </Card>
   );
 };

@@ -9,7 +9,15 @@ const Shop = () => {
   const getProducts = async () => {
     try {
       const res = await axios.get(`/api/v1/products`);
-      setProducts(res.data.data || []);
+      let shoppingList = [];
+
+      let shopItems = res.data.data;
+
+      shopItems.forEach((item) => {
+        shoppingList.push(item);
+      });
+
+      setProducts(shoppingList || []);
     } catch (err) {
       console.log(err.response);
     }

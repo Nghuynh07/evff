@@ -9,10 +9,8 @@ const Cart = () => {
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
 
-  const itemLength = cCxt.itemTotal();
-
   useEffect(() => {
-    setItems(cCxt.getCart());
+    setItems(cCxt.getCart() || []);
   }, [run]);
 
   const total = () => {
@@ -24,7 +22,7 @@ const Cart = () => {
   return (
     <CartContainer>
       <Checkout
-        quantity={itemLength}
+        quantity={cCxt.itemTotal()}
         products={items}
         run={run}
         setRun={setRun}

@@ -8,19 +8,19 @@ const Shop = () => {
   const [loading, setLoading] = useState(false);
 
   const getProducts = async () => {
-    return await axios.get('/api/v1/products');
+    return await axios.get('http://localhost:4000/api/v1/products');
   };
 
   const viewProducts = () => {
     setLoading(true);
     getProducts().then((res) => {
-      setProducts(res.data.data);
+      console.log(res.data.dada);
+      setProducts(res.data.data || []);
       setLoading(false);
     });
   };
 
   useEffect(() => {
-    console.log(products);
     viewProducts();
   }, []);
 
@@ -31,10 +31,9 @@ const Shop = () => {
           <h3>loading please wait....</h3>
         </div>
       )}
-      {products &&
-        products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))}
+      {products.map((product) => (
+        <Product key={product._id} product={product} />
+      ))}
     </ProductsContainer>
   );
 };

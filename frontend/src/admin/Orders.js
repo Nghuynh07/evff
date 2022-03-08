@@ -8,13 +8,12 @@ const Orders = () => {
 
   const token = auth.isAuthenticated().data.token;
 
-  const loadOrders = async () => {
-    await axios(`http://localhost:4000/api/v1/orders`, {
+  const loadOrders = async (token) => {
+    await axios(`/api/v1/orders`, {
       method: `GET`,
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
-        'Access-Control-Allow-Origin': true,
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
@@ -23,16 +22,12 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    loadOrders();
+    loadOrders(token);
   }, []);
 
   const showOrdersLength = () => {
     if (orders.length > 0) {
-      return (
-        <h1 style={{ margin: 'auto' }} className="text-danger display-2">
-          Total Orders: {orders.length}
-        </h1>
-      );
+      return <h1 style={{ margin: 'auto' }}>Total Orders: {orders.length}</h1>;
     } else {
       return <h1>No Order</h1>;
     }

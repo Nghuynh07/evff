@@ -25,7 +25,7 @@ exports.getAllOrders = async (req, res) => {
       'user',
       'firstName lastName email _id'
     );
-    console.log(orders);
+    // console.log(orders);
     res.json(orders);
   } catch (err) {
     console.log(err);

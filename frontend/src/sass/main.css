@@ -102,8 +102,6 @@ html {
   width: 80vw;
   margin: 10vh auto;
   padding: 2rem;
-  -webkit-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   display: -ms-grid;
   display: grid;
@@ -571,8 +569,6 @@ select {
   outline: none;
   border: none;
   border-radius: 5px;
-  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   resize: none;
   letter-spacing: 0.13rem;
   color: #212121;

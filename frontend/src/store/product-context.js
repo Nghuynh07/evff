@@ -3,16 +3,16 @@ import axios from 'axios';
 export const ProductContext = createContext({
   products: [],
   deleteProduct: (token, productId) => {},
+  getProducts: () => {},
 });
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    const data = await axios.get('/api/v1/products').then((res) => {
+    await axios.get('http://localhost:4000/api/v1/products').then((res) => {
       setProducts(res.data.data);
     });
-    return data;
   };
 
   const deleteProduct = async (token, productId) => {
@@ -37,6 +37,7 @@ export const ProductProvider = ({ children }) => {
   const values = {
     products,
     deleteProduct,
+    getProducts,
   };
 
   return (

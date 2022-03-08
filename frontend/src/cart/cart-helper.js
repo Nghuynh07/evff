@@ -1,8 +1,8 @@
 export const addItem = (item) => {
   let cart = [];
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      cart = JSON.parse(localStorage.getItem("cart"));
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
     }
 
     const existingProduct = cart.find((product) => product._id === item._id);
@@ -18,35 +18,32 @@ export const addItem = (item) => {
       existingProduct.totalPrice = existingProduct.totalPrice + item.price;
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 };
 
 export const removeItem = (productId) => {
   let cart = [];
   console.log(cart);
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      cart = JSON.parse(localStorage.getItem("cart"));
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
     }
-
     const currentItemInProduct = cart.filter(
       (product) => product._id === productId
     );
 
     cart.splice(currentItemInProduct, 1);
 
-    // eslint-disable-next-line array-callback-return
-
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 };
 
 export const subtractProductFromCart = (itemID) => {
   let cart = [];
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      cart = JSON.parse(localStorage.getItem("cart"));
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
     }
 
     const existingProduct = cart.find((product) => product._id === itemID);
@@ -61,15 +58,15 @@ export const subtractProductFromCart = (itemID) => {
       }
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 };
 
 export const increaseExistingProductInCart = (item) => {
   let cart = [];
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      cart = JSON.parse(localStorage.getItem("cart"));
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
     }
   }
   const existingProduct = cart.find((product) => product._id === item._id);
@@ -77,31 +74,31 @@ export const increaseExistingProductInCart = (item) => {
   existingProduct.count++;
   existingProduct.totalPrice = existingProduct.totalPrice + item.price;
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem('cart', JSON.stringify(cart));
 };
 
 export const itemTotal = () => {
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      return JSON.parse(localStorage.getItem("cart")).length;
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      return JSON.parse(localStorage.getItem('cart')).length;
     }
   }
   return 0;
 };
 
 export const getCart = () => {
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      return JSON.parse(localStorage.getItem("cart"));
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      return JSON.parse(localStorage.getItem('cart'));
     }
   }
 };
 
 export const updateItem = (productId, count) => {
   let cart = [];
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("cart")) {
-      cart = JSON.parse(localStorage.getItem("cart"));
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
     }
     // eslint-disable-next-line array-callback-return
     cart.map((product, index) => {
@@ -110,6 +107,6 @@ export const updateItem = (productId, count) => {
       }
     });
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 };

@@ -1,7 +1,7 @@
 import { useState, useContext, useCallback } from 'react';
 import { AuthContext } from '../store/auth-context';
-
-export const useProduct = (createProduct) => {
+import axios from 'axios';
+export const useProduct = () => {
   const auth = useContext(AuthContext);
   const [product, setProduct] = useState({
     name: '',
@@ -14,6 +14,17 @@ export const useProduct = (createProduct) => {
     error: '',
     formData: '',
   });
+  const newProduct = async (token, object) => {
+    return await axios(`http://localhost:4000/api/v1/products`, {
+      method: `POST`,
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': true,
+      },
+      data: object,
+    });
+  };
 
   const {
     data: { token },
@@ -45,7 +56,7 @@ export const useProduct = (createProduct) => {
   const onSubmit = (event) => {
     event.preventDefault();
     setProduct({ ...product, loading: true });
-    createProduct(token, formData)
+    newProduct(token, formData)
       .then((data) => {
         setProduct({
           ...data,

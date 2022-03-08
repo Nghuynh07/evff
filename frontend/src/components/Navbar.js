@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthContext } from '../store/auth-context';
-import { itemTotal } from '../cart/cart-helper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHouseChimney,
@@ -11,13 +10,11 @@ import {
   faUnlock,
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from '../store/cart-context';
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-
-  useEffect(() => {
-    itemTotal();
-  }, []);
+  const cartContext = useContext(CartContext);
 
   return (
     <header className="navbar">
@@ -68,7 +65,7 @@ const Navbar = () => {
           <Link className="navbar-link" to="/cart">
             <FontAwesomeIcon icon={faCartShopping} />
           </Link>
-          <span className="navbar-cart-size">{itemTotal()}</span>
+          <span className="navbar-cart-size">{cartContext.itemTotal()}</span>
         </div>
       </div>
     </header>

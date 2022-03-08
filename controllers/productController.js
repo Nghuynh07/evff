@@ -5,6 +5,12 @@ const sharp = require('sharp');
 const catchAsync = require('./../utils/catchAsync');
 const multerStorage = multer.memoryStorage();
 
+exports.getAllProducts = globalHandlers.getAll(Product);
+exports.createProduct = globalHandlers.createOne(Product);
+exports.getOneProduct = globalHandlers.getOne(Product);
+exports.updateOneProduct = globalHandlers.updateOne(Product);
+exports.deleteOneProduct = globalHandlers.deleteOne(Product);
+
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
@@ -33,9 +39,3 @@ exports.resizeProductPhoto = catchAsync(async (req, res, next) => {
 
   next();
 });
-
-exports.getAllProducts = globalHandlers.getAll(Product);
-exports.createProduct = globalHandlers.createOne(Product);
-exports.getOneProduct = globalHandlers.getOne(Product);
-exports.updateOneProduct = globalHandlers.updateOne(Product);
-exports.deleteOneProduct = globalHandlers.deleteOne(Product);

@@ -493,6 +493,7 @@ select {
   display: grid;
   grid-gap: 0.5rem;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+
   border-bottom: 1px solid $color-light-gray;
   &:not(first-child) {
     margin-top: 1rem;
@@ -510,6 +511,7 @@ select {
     justify-self: center;
     display: grid;
     grid-auto-flow: row;
+    text-align: center;
     grid-gap: 1rem;
     color: black;
   }

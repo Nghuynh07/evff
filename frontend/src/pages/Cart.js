@@ -1,14 +1,18 @@
+import { useEffect, useState, useContext } from 'react';
 import CartContainer from '../layout/CartContainer';
 import CartItems from '../components/CartItems';
 import Checkout from '../components/Checkout';
-import { useEffect, useState } from 'react';
-import { getCart, itemTotal } from '../cart/cart-helper';
+import { CartContext } from '../store/cart-context';
 const Cart = () => {
+  const cartContext = useContext(CartContext);
+
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
 
+  const itemLength = cartContext.itemTotal();
+
   useEffect(() => {
-    setItems(getCart() || []);
+    setItems(cartContext.getCart());
   }, [run]);
 
   const total = () => {
@@ -20,7 +24,7 @@ const Cart = () => {
   return (
     <CartContainer>
       <Checkout
-        quantity={itemTotal()}
+        quantity={itemLength}
         products={items}
         run={run}
         setRun={setRun}

@@ -54,7 +54,7 @@ app.use('/public', express.static('public'));
 //For security HTTP headers
 app.use(helmet());
 
-app.enable('trust proxy');
+// app.enable('trust proxy');
 app.use(cors());
 app.options('*', cors());
 

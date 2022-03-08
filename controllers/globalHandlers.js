@@ -5,15 +5,14 @@ const APIFeatures = require('./../utils/apifeatures');
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     //EXECUTE QUERY
-    // const features = new APIFeatures(Model.find(), req.query)
-    //   .filter()
-    //   .sort()
-    //   .limit()
-    //   .pagination();
-    // const doc = await features.query;
+    const features = new APIFeatures(Model.find(), req.query)
+      .filter()
+      .sort()
+      .limit()
+      .pagination();
+    const doc = await features.query;
 
-    const doc = await Model.find();
-
+    console.log(doc);
     //SEND RESPONSE
     res.status(200).json({
       status: 'Success',

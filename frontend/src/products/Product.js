@@ -1,17 +1,18 @@
-import React from 'react';
-
+import { useContext } from 'react';
 import ShowImage from '../components/ShowImage';
-import { addItem } from '../cart/cart-helper';
+import { CartContext } from '../store/cart-context';
 
 const Card = ({ children }) => {
   return <div className="card">{children}</div>;
 };
 
 const Product = ({ product }) => {
+  const cartContext = useContext(CartContext);
+
   const { photo, name, price, packaging } = product;
 
   const addItemToCart = () => {
-    addItem(product);
+    cartContext.addItem(product);
   };
 
   return (

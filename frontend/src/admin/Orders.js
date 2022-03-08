@@ -1,20 +1,24 @@
+import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
-import { listOrders } from './apiAdmin';
+
 const Orders = () => {
   const auth = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
 
-  const loadOrders = () => {
-    listOrders(auth.isAuthenticated().data.token).then((data) => {
-      let orderList = [];
-      let list = data.data;
+  const token = auth.isAuthenticated().data.token;
 
-      list.forEach((item) => {
-        orderList.push(item);
-      });
-
-      setOrders(orderList || []);
+  const loadOrders = async () => {
+    await axios(`http://localhost:4000/api/v1/orders`, {
+      method: `GET`,
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+        'Access-Control-Allow-Origin': true,
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      setOrders(res.data);
     });
   };
 

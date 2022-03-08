@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import Input from '../components/Input';
 import { useProduct } from './use-product-hook';
-import { createProduct } from './product-api';
 import FormLayout from '../layout/FormLayout';
+
 const NewProduct = () => {
   const { product, categories, inputChangeHandler, onSubmit, setProduct } =
-    useProduct(createProduct);
+    useProduct();
   useEffect(() => {
     setProduct({ ...product, formData: new FormData() });
   }, []);

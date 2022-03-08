@@ -1,34 +1,18 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts } from './apiAdmin';
-import { deleteProduct } from './apiAdmin';
+
 import { AuthContext } from '../store/auth-context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ProductContext } from '../store/product-context';
 const ViewProducts = () => {
-  const [products, setProducts] = useState([]);
   const auth = useContext(AuthContext);
   const token = auth.isAuthenticated().data.token;
-
-  const viewProducts = () => {
-    getProducts().then((res) => {
-      console.log(res);
-      setProducts(res.data.data || []);
-    });
-  };
-
-  useEffect(() => {
-    viewProducts();
-  }, []);
+  const pContext = useContext(ProductContext);
+  const products = pContext.products;
 
   const handleDelete = (productID) => {
-    deleteProduct(token, productID)
-      .then((res) => {
-        viewProducts();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    pContext.deleteProduct(token, productID);
   };
 
   return (

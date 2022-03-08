@@ -1,13 +1,11 @@
+import { useContext } from 'react';
 import ShowImage from './ShowImage';
-import {
-  removeItem,
-  subtractProductFromCart,
-  increaseExistingProductInCart,
-} from '../cart/cart-helper';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from '../store/cart-context';
 const CartItems = ({ item, setRun = (f) => f, run }) => {
+  const cartContext = useContext(CartContext);
+
   return (
     <div className="cart-items">
       <ShowImage photo={item.photo} imageStyle="cart-items-image" />
@@ -21,7 +19,7 @@ const CartItems = ({ item, setRun = (f) => f, run }) => {
           <button
             className="cart-items-actions-button cart-items-actions-button_add"
             onClick={() => {
-              increaseExistingProductInCart(item);
+              cartContext.increaseExistingProductInCart(item);
               setRun(!run);
             }}
           >
@@ -30,7 +28,7 @@ const CartItems = ({ item, setRun = (f) => f, run }) => {
           <button
             className="cart-items-actions-button cart-items-actions-button_minus"
             onClick={() => {
-              subtractProductFromCart(item._id);
+              cartContext.subtractProductFromCart(item._id);
               setRun(!run);
             }}
           >
@@ -39,7 +37,7 @@ const CartItems = ({ item, setRun = (f) => f, run }) => {
           <button
             className="cart-items-actions-button cart-items-actions-button_remove"
             onClick={() => {
-              removeItem(item._id);
+              cartContext.removeItem(item._id);
               setRun(!run);
             }}
           >

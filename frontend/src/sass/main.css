@@ -619,6 +619,7 @@ select {
   display: -ms-grid;
   display: grid;
   grid-auto-flow: row;
+  text-align: center;
   grid-gap: 1rem;
   color: black;
 }

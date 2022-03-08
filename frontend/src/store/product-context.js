@@ -9,17 +9,10 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    const res = await axios.get('/api/v1/products').then((res) => {
-      const list = [];
-
-      res.data.data.forEach((element) => {
-        list.push(element);
-      });
-
-      console.log(list);
-      setProducts(list);
+    const data = await axios.get('/api/v1/products').then((res) => {
+      setProducts(res.data.data);
     });
-    return res;
+    return data;
   };
 
   const deleteProduct = async (token, productId) => {

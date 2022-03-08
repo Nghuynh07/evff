@@ -4,15 +4,15 @@ import CartItems from '../components/CartItems';
 import Checkout from '../components/Checkout';
 import { CartContext } from '../store/cart-context';
 const Cart = () => {
-  const cartContext = useContext(CartContext);
+  const cCxt = useContext(CartContext);
 
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
 
-  const itemLength = cartContext.itemTotal();
+  const itemLength = cCxt.itemTotal();
 
   useEffect(() => {
-    setItems(cartContext.getCart());
+    setItems(cCxt.getCart());
   }, [run]);
 
   const total = () => {

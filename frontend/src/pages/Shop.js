@@ -20,11 +20,17 @@ const Shop = () => {
   };
 
   useEffect(() => {
+    console.log(products);
     viewProducts();
   }, []);
 
   return (
     <ProductsContainer>
+      {loading && (
+        <div>
+          <h3>loading please wait....</h3>
+        </div>
+      )}
       {products.map((product) => (
         <Product key={product._id} product={product} />
       ))}

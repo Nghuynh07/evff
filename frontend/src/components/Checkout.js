@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import { Link } from 'react-router-dom';
-import { createOrder } from '../cart/cart-api';
 
+import axios from 'axios';
 const Checkout = ({
   quantity,
   products,
@@ -18,6 +18,21 @@ const Checkout = ({
     address: '',
     date: '',
   });
+
+  const createOrder = async (token, createOrderData) => {
+    return await axios(`http://localhost:4000/api/v1/orders`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': true,
+        Authorization: `Bearer ${token}`,
+      },
+      data: JSON.stringify({
+        order: createOrderData,
+      }),
+    });
+  };
 
   const handleAddress = (event) => {
     setData({ ...data, address: event.target.value });

@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const createOrder = async (token, createOrderData) => {
-  return await axios(`/api/v1/orders`, {
+  return await axios(`http://localhost:4000/api/v1/orders`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

@@ -9,7 +9,7 @@ const ViewProducts = () => {
   const auth = useContext(AuthContext);
   const token = auth.isAuthenticated().data.token;
   const pContext = useContext(ProductContext);
-  const { products, deleteProduct } = pContext;
+  const { products, deleteProduct, loading } = pContext;
 
   const handleDelete = (productID) => {
     deleteProduct(token, productID);
@@ -28,31 +28,32 @@ const ViewProducts = () => {
           </tr>
         </thead>
         <tbody className="table-body">
-          {products.map((product) => (
-            <tr key={product._id} className="table-body__row">
-              <td className="table-body__data">{product.name}</td>
-              <td className="table-body__data">
-                ${product.price}/{product.packaging}
-              </td>
-              <td className="table-body__data">
-                <Link to={`/admin/products-update/${product._id}`}>
+          {loading &&
+            products.map((product) => (
+              <tr key={product._id} className="table-body__row">
+                <td className="table-body__data">{product.name}</td>
+                <td className="table-body__data">
+                  ${product.price}/{product.packaging}
+                </td>
+                <td className="table-body__data">
+                  <Link to={`/admin/products-update/${product._id}`}>
+                    <button
+                      className="table-button table-update"
+                      title="Currently Unavailable"
+                      disabled
+                    >
+                      Update
+                    </button>
+                  </Link>
                   <button
-                    className="table-button table-update"
-                    title="Currently Unavailable"
-                    disabled
+                    className="table-button table-delete"
+                    onClick={() => handleDelete(product._id)}
                   >
-                    Update
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
-                </Link>
-                <button
-                  className="table-button table-delete"
-                  onClick={() => handleDelete(product._id)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

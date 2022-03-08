@@ -24,7 +24,7 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      await axios('http://localhost:4000/api/v1/products').then((res) => {
+      await axios('/api/v1/products').then((res) => {
         setLoading(true);
         setProducts(res.data.data);
       });

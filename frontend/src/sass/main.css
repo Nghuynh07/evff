@@ -12,7 +12,7 @@ html {
           box-sizing: border-box;
   font-size: 62.5%;
   font-family: 'Montserrat', sans-serif;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.13rem;
 }
 
 .dashboard-container {
@@ -574,7 +574,7 @@ select {
   -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   resize: none;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.13rem;
   color: #212121;
   font-size: 1.6rem;
 }

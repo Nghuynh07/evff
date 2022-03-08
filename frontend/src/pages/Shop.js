@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import Product from '../products/Product';
 import ProductsContainer from '../layout/ProductsContainer';
 import { ProductContext } from '../store/product-context';
+import Card from '../layout';
 const Shop = () => {
   const pContext = useContext(ProductContext);
+
   const { products, loading } = pContext;
 
   const p = [
@@ -17,7 +18,7 @@ const Shop = () => {
       _id: 'p2',
       name: 'name2',
       price: 20,
-      photo: 'product-Apples-Varieties-1646627812783.jpeg',
+      photo: 'product-Asian Pears-1646627850044.jpeg',
     },
     {
       _id: 'p3',
@@ -29,14 +30,21 @@ const Shop = () => {
       _id: 'p4',
       name: 'name4',
       price: 20,
-      photo: 'product-Apples-Varieties-1646627812783.jpeg',
+      photo: 'product-Asian Pears-1646627850044.jpeg',
     },
   ];
 
   return (
     <ProductsContainer>
       {p.map((product) => (
-        <Product key={product._id} product={product} />
+        <Card>
+          <img src={`/public/${product.photo}`} alt={product.name} />
+          <div className="product-info">
+            <h2 className="product-name">{product.name}</h2>
+            <h4 className="product-price">${product.price}</h4>
+          </div>
+          <button className="product-button">add to cart</button>
+        </Card>
       ))}
     </ProductsContainer>
   );

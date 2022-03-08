@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import ShowImage from '../components/ShowImage';
 import { CartContext } from '../store/cart-context';
 
-const Card = ({ children }) => {
+export const Card = ({ children }) => {
   return <div className="card">{children}</div>;
 };
 

@@ -12,7 +12,7 @@ const ViewProducts = () => {
 
   const viewProducts = () => {
     getProducts().then((res) => {
-      setProducts(res.data.data);
+      setProducts(res.data.data || []);
     });
   };
 

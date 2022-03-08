@@ -7,7 +7,7 @@ const Orders = () => {
 
   const loadOrders = () => {
     listOrders(auth.isAuthenticated().data.token).then((data) => {
-      setOrders(data.data);
+      setOrders(data.data || []);
     });
   };
 

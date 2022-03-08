@@ -9,7 +9,7 @@ const Orders = () => {
   const token = auth.isAuthenticated().data.token;
 
   const loadOrders = async () => {
-    await axios(`http://localhost:4000/api/v1/orders`, {
+    await axios(`/api/v1/orders`, {
       method: `GET`,
       headers: {
         Accept: 'application/json',

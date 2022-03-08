@@ -14,7 +14,7 @@ const ViewProducts = () => {
   useEffect(() => {
     setLoading(true);
     const data = async () => {
-      await axios.get('http://localhost:4000/api/v1/products').then((res) => {
+      await axios.get('api/v1/products').then((res) => {
         setLoading(false);
         setProducts(res.data.data);
       });
@@ -23,15 +23,12 @@ const ViewProducts = () => {
   }, []);
 
   const deleteProduct = async (token, productId) => {
-    let productToBeDeleted = await axios(
-      `http://localhost:4000/api/v1/products/${productId}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((res) => {});
+    let productToBeDeleted = await axios(`api/v1/products/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {});
     return productToBeDeleted;
   };
 

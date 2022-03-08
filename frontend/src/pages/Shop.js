@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ProductsContainer from '../layout/ProductsContainer';
 import { ProductContext } from '../store/product-context';
-import Card from '../layout';
+import { Card } from '../products/Product';
 const Shop = () => {
   const pContext = useContext(ProductContext);
 
@@ -37,7 +37,7 @@ const Shop = () => {
   return (
     <ProductsContainer>
       {p.map((product) => (
-        <Card>
+        <Card key={product._id}>
           <img src={`/public/${product.photo}`} alt={product.name} />
           <div className="product-info">
             <h2 className="product-name">{product.name}</h2>

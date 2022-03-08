@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "node server.js",
     "start:prod": "set NODE_ENV=production && nodemon server.js",
     "start:dev": "set NODE_ENV=development && nodemon server.js"
   },

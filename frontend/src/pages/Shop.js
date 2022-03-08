@@ -5,20 +5,16 @@ import { ProductContext } from '../store/product-context';
 
 const Shop = () => {
   const pContext = useContext(ProductContext);
-  const { loading, getProducts } = pContext;
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getProducts().then((res) => {
-      setProducts(res.data);
-    });
-  }, [getProducts]);
+  const { loading, products } = pContext;
+  // console.log(products);
 
   return (
     <ProductsContainer>
-      {products.map((product) => (
-        <Product key={product._id} product={product} />
-      ))}
+      {loading &&
+        products.length > 0 &&
+        products.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
     </ProductsContainer>
   );
 };

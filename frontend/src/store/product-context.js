@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 export const ProductContext = createContext({
+  products: [],
   loading: false,
   deleteProduct: (token, productId) => {},
   getProducts: () => {},
@@ -8,7 +9,7 @@ export const ProductContext = createContext({
 
 export const ProductProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-
+  const [products, setProducts] = useState([]);
   const deleteProduct = async (token, productId) => {
     let productToBeDeleted = await axios(
       `http://localhost:4000/api/v1/products/${productId}`,
@@ -22,19 +23,24 @@ export const ProductProvider = ({ children }) => {
     return productToBeDeleted;
   };
 
-  const getProducts = async () => {
-    const res = await axios('/api/v1/products');
-    return res.data;
-  };
+  const getProducts = useCallback(async () => {
+    try {
+      await axios('/api/v1/products').then((res) => {
+        setLoading(true);
+        setProducts(res.data.data);
+      });
+    } catch (err) {}
+  }, []);
 
-  // useEffect(() => {
-  //   getProducts();
-  // }, []);
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
 
   const values = {
     deleteProduct,
     loading,
     getProducts,
+    products,
   };
 
   return (

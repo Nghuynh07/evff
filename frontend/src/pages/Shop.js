@@ -1,27 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Product from '../products/Product';
 import ProductsContainer from '../layout/ProductsContainer';
 import { ProductContext } from '../store/product-context';
-import { useEffect } from 'react';
-
-import axios from 'axios';
 const Shop = () => {
-  // const pContext = useContext(ProductContext);
-  const [products, setProducts] = useState([]);
-
-  const getProducts = async () => {
-    await axios.get('/api/v1/products').then((res) => {
-      setProducts(res.data.data);
-    });
-  };
-
-  useEffect(() => {
-    getProducts();
-  }, []);
+  const pContext = useContext(ProductContext);
+  const { products, loading } = pContext;
 
   return (
     <ProductsContainer>
-      {products &&
+      {loading &&
         products.map((product) => (
           <Product key={product._id} product={product} />
         ))}

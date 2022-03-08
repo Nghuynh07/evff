@@ -9,10 +9,10 @@ const ViewProducts = () => {
   const auth = useContext(AuthContext);
   const token = auth.isAuthenticated().data.token;
   const pContext = useContext(ProductContext);
-  const products = pContext.products;
+  const { products, deleteProduct } = pContext;
 
   const handleDelete = (productID) => {
-    pContext.deleteProduct(token, productID);
+    deleteProduct(token, productID);
   };
 
   return (

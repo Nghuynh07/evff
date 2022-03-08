@@ -1,15 +1,39 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { ProductContext } from '../store/product-context';
+
 const ViewProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const auth = useContext(AuthContext);
   const token = auth.isAuthenticated().data.token;
-  const pContext = useContext(ProductContext);
-  const { products, deleteProduct, loading } = pContext;
+
+  useEffect(() => {
+    setLoading(true);
+    const data = async () => {
+      await axios.get('http://localhost:4000/api/v1/products').then((res) => {
+        setLoading(false);
+        setProducts(res.data.data);
+      });
+    };
+    data();
+  }, []);
+
+  const deleteProduct = async (token, productId) => {
+    let productToBeDeleted = await axios(
+      `http://localhost:4000/api/v1/products/${productId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res) => {});
+    return productToBeDeleted;
+  };
 
   const handleDelete = (productID) => {
     deleteProduct(token, productID);

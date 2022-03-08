@@ -1,24 +1,26 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Product from '../products/Product';
 import axios from 'axios';
 import ProductsContainer from '../layout/ProductsContainer';
-import { ProductContext } from '../store/product-context';
 
 const Shop = () => {
-  const pContext = useContext(ProductContext);
-  const { getProducts } = pContext;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const getProducts = async () => {
+    return await axios.get('/api/v1/products');
+  };
+
+  const viewProducts = () => {
     setLoading(true);
-    const data = async () => {
-      await axios.get('/api/v1/products').then((res) => {
-        setLoading(false);
-        setProducts(res.data.data);
-      });
-    };
-    data();
+    getProducts().then((res) => {
+      setProducts(res.data.data);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    viewProducts();
   }, []);
 
   return (

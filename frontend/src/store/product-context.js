@@ -10,7 +10,7 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    await axios.get('http://localhost:4000/api/v1/products').then((res) => {
+    await axios.get('/api/v1/products').then((res) => {
       setProducts(res.data.data);
     });
   };

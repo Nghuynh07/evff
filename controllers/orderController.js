@@ -71,17 +71,17 @@ exports.updateOrderStatus = (req, res) => {
 };
 
 exports.getUserOrderHistory = async (req, res) => {
-  await Order.find({ user: req.user._id })
-    .populate('user', '_id firstName lastName')
-    .sort('-created')
-    .exec((err, orders) => {
-      if (err) {
-        res.status(400).json({ err: err });
-      }
-      res.json({
-        status: 'success',
-        length: orders.length,
-        orders,
-      });
+  try {
+    const orders = await Order.find({ user: req.user._id })
+      .populate('user', '_id firstName lastName')
+      .sort('-created');
+
+    res.json({
+      status: 'success',
+      length: orders.length,
+      orders,
     });
+  } catch (err) {
+    console.log(err);
+  }
 };

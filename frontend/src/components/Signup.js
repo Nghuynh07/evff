@@ -5,7 +5,7 @@ import { AuthContext } from '../store/auth-context';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-const URL = 'http://localhost:4000/api/v1/users/signup';
+const URL = '/api/v1/users/signup';
 const Signup = () => {
   const authContext = useContext(AuthContext);
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);

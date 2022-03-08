@@ -5,11 +5,14 @@ import { ProductContext } from '../store/product-context';
 const Shop = () => {
   const pContext = useContext(ProductContext);
 
+  console.log(pContext.products);
+
   return (
     <ProductsContainer>
-      {pContext.products.map((product) => (
-        <Product key={product._id} product={product} />
-      ))}
+      {pContext.products &&
+        pContext.products.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
     </ProductsContainer>
   );
 };

@@ -35,9 +35,9 @@ app.use(function (req, res, next) {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
   console.log(process.env.NODE_ENV);
+
   // app.use('/public', express.static(`${__dirname}/public`));
-  app.use('/public', express.static('public'));
-  app.use(express.static(`${__dirname}/public`));
+  // app.use('/public', express.static('public'));
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
@@ -48,6 +48,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(express.static(`${__dirname}/public`));
 app.use('/public', express.static('public'));
 
 //For security HTTP headers

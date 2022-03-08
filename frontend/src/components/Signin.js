@@ -44,7 +44,7 @@ const Signin = () => {
 
       setRedirectToDashBoard(true);
     } catch (err) {
-      console.log(err.response.data.message);
+      // console.log(err.response.data.message);
       setData({
         ...data,
         loading: false,

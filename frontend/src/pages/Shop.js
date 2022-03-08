@@ -13,7 +13,7 @@ const Shop = () => {
   useEffect(() => {
     setLoading(true);
     const data = async () => {
-      await axios.get('http://localhost:4000/api/v1/products').then((res) => {
+      await axios.get('/api/v1/products').then((res) => {
         setLoading(false);
         setProducts(res.data.data);
       });

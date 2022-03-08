@@ -6,7 +6,6 @@ export const ProductContext = createContext({
 });
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
   const deleteProduct = async (token, productId) => {
     let productToBeDeleted = await axios(
       `http://localhost:4000/api/v1/products/${productId}`,

@@ -8,7 +8,7 @@ const Shop = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/api/v1/products`);
+      const res = await axios.get(`/api/v1/products`);
       setProducts(res.data.data);
     } catch (err) {
       console.log(err.response);

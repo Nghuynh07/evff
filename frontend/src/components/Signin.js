@@ -5,7 +5,7 @@ import { AuthContext } from '../store/auth-context';
 import { Link, Redirect } from 'react-router-dom';
 import FormLayout from '../layout/FormLayout';
 
-const URL = 'http://localhost:4000/api/v1/users/login';
+const URL = '/api/v1/users/login';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);

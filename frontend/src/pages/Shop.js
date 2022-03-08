@@ -33,12 +33,12 @@ const Shop = () => {
       photo: 'product-Asian Pears-1646627850044.jpeg',
     },
   ];
-
+  let url = `/public`;
   return (
     <ProductsContainer>
       {p.map((product) => (
         <Card key={product._id}>
-          <img src={`/public/${product.photo}`} alt={product.name} />
+          <img src={`${url}/${product.photo}`} alt={product.name} />
           <div className="product-info">
             <h2 className="product-name">{product.name}</h2>
             <h4 className="product-price">${product.price}</h4>

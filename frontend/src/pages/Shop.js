@@ -8,7 +8,7 @@ const Shop = () => {
   const [loading, setLoading] = useState(false);
 
   const getProducts = async () => {
-    return await axios.get('http://localhost:4000/api/v1/products');
+    return await axios.get('/api/v1/products');
   };
 
   const viewProducts = () => {

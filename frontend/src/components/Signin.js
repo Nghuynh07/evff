@@ -13,12 +13,12 @@ const Signin = () => {
   const [data, setData] = useState({
     email: '',
     password: '',
+    error: '',
     loading: false,
     success: false,
-    error: '',
   });
 
-  const { email, password, loading, error, success } = data;
+  const { email, password, error, loading, success } = data;
 
   const inputHandler = (e) => {
     const inputData = { ...data };
@@ -44,6 +44,7 @@ const Signin = () => {
 
       setRedirectToDashBoard(true);
     } catch (err) {
+      console.log(err.response.data.message);
       setData({
         ...data,
         loading: false,

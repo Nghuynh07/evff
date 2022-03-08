@@ -145,7 +145,6 @@ html {
   position: relative;
   border-radius: 10px;
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
-  position: relative;
   &-title {
     margin-bottom: 2rem;
     font-size: 3rem;
@@ -208,17 +207,26 @@ select {
   font-size: 1.5rem;
   font-weight: bold;
   background-color: #448aff;
-  transition: $transition;
+
   cursor: pointer;
   @include small-letter-spacing();
   @include text-uppercase();
-  &:hover {
-    background-color: $color-light-gray;
-    color: #448aff;
-  }
-  &:active {
-    scale: 0.95;
-  }
+}
+
+.product-button:hover,
+.signup-button:hover,
+.signin-button:hover,
+.form-add-production-button:hover {
+  background-color: $color-light-gray;
+  color: #448aff;
+}
+
+.product-button:active,
+.signup-button:active,
+.signin-button:active,
+.checkout-button:active,
+.form-add-production-button:active {
+  transform: scale(0.95);
 }
 
 //ERROR
@@ -231,17 +239,17 @@ select {
   color: salmon;
 }
 
-.firstNameError,
-.lastNameError,
-.emailError,
-.passwordError,
-.confirmPasswordError {
-  position: absolute;
-  display: inline-block;
-  right: 2.2rem;
-  color: red;
-  font-size: 1.2rem;
-}
+// .firstNameError,
+// .lastNameError,
+// .emailError,
+// .passwordError,
+// .confirmPasswordError {
+//   position: absolute;
+//   display: inline-block;
+//   right: 2.2rem;
+//   color: red;
+//   font-size: 1.2rem;
+// }
 //INPUT
 .input {
   display: flex;
@@ -267,6 +275,7 @@ select {
     font-size: 2rem;
     margin-bottom: 0.5rem;
     opacity: 0.5;
+    pointer-events: none;
     @include small-letter-spacing();
   }
 }
@@ -482,13 +491,13 @@ select {
 .cart-items {
   padding: 0.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  border-radius: 5px;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  border-bottom: 1px solid $color-light-gray;
   &:not(first-child) {
-    margin-top: 0.3rem;
+    margin-top: 1rem;
   }
+
   &-image {
     width: 100%;
     height: 20vh;
@@ -501,6 +510,7 @@ select {
     justify-self: center;
     display: grid;
     grid-auto-flow: row;
+    grid-gap: 1rem;
     color: black;
   }
 
@@ -522,6 +532,7 @@ select {
     grid-auto-flow: column;
     grid-gap: 1rem;
     justify-items: space-between;
+    margin-bottom: 1rem;
     &-button {
       outline: none;
       border: none;
@@ -619,7 +630,6 @@ select {
 }
 
 //ORDERS
-
 .orders {
   width: 60%;
   margin: auto;
@@ -640,7 +650,6 @@ select {
       color: #fff;
     }
   }
-
   &-info {
     outline: none;
     display: flex;
@@ -681,6 +690,25 @@ select {
     font-weight: bold;
     color: green;
     margin-top: 2rem;
+  }
+
+  &-purchase-date {
+    margin-bottom: 1rem;
+    font-size: $medium-font-size;
+  }
+}
+
+.purchase-container {
+  width: 60%;
+  margin: auto;
+  background-color: $color-light-gray;
+  padding: 2rem;
+  border-radius: 5px;
+  &:nth-child(even) {
+    margin-top: 1rem;
+  }
+  .purchase-total {
+    margin-bottom: 1rem;
   }
 }
 

@@ -6,15 +6,7 @@ import {
 } from '../cart/cart-helper';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHouseChimney,
-  faShop,
-  faCartShopping,
-  faUser,
-  faXmark,
-  faMinus,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 const CartItems = ({ item, setRun = (f) => f, run }) => {
   return (
     <div className="cart-items">

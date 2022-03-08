@@ -7,6 +7,7 @@ const Input = ({
   value,
   onChange,
   name,
+  step = null,
 }) => {
   return (
     <div className="input">
@@ -21,7 +22,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         name={name}
-        step="0.01"
+        step={step}
       />
     </div>
   );

@@ -86,7 +86,7 @@ const Signup = () => {
       {redirectUser()}
       <FormLayout>
         <form onSubmit={signup} className="form">
-          {errors && <p class="error-signup">{errors}</p>}
+          {errors && <p className="error-signup">{errors}</p>}
           <Input
             htmlFor="firstName"
             label="First name"

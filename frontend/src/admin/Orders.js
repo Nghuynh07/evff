@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import { listOrders } from './apiAdmin';
-
 const Orders = () => {
   const auth = useContext(AuthContext);
   const [orders, setOrders] = useState([]);

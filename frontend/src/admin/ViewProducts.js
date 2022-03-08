@@ -12,6 +12,7 @@ const ViewProducts = () => {
 
   const viewProducts = () => {
     getProducts().then((res) => {
+      console.log(res);
       setProducts(res.data.data || []);
     });
   };

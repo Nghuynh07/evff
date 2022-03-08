@@ -7,7 +7,14 @@ const Orders = () => {
 
   const loadOrders = () => {
     listOrders(auth.isAuthenticated().data.token).then((data) => {
-      setOrders(data.data || []);
+      let orderList = [];
+      let list = data.data;
+
+      list.forEach((item) => {
+        orderList.push(item);
+      });
+
+      setOrders(orderList || []);
     });
   };
 
@@ -23,7 +30,7 @@ const Orders = () => {
         </h1>
       );
     } else {
-      return <h1 className="text-danger">No Order</h1>;
+      return <h1>No Order</h1>;
     }
   };
   return (

@@ -489,10 +489,10 @@ select {
 //CART ITEMS
 
 .cart-items {
-  padding: 0.5rem;
+  padding: 2rem;
   display: grid;
   grid-gap: 0.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 
   border-bottom: 1px solid $color-light-gray;
   &:not(first-child) {

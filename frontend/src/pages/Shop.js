@@ -7,8 +7,6 @@ const Shop = () => {
   const pContext = useContext(ProductContext);
   const { loading, products } = pContext;
 
-  console.log(products.length);
-
   return (
     <ProductsContainer>
       {loading &&

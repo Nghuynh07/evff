@@ -363,6 +363,11 @@ select {
     }
   }
 }
+
+.active {
+  opacity: 0.4;
+}
+
 //HEADER
 .header {
   min-height: 92vh;

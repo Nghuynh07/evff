@@ -9,7 +9,7 @@ const Shop = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('/api/v1/products').then((res) => {
+    axios.get('http://localhost:4000/api/v1/products').then((res) => {
       console.log(res.data.data);
       setProducts(res.data.data);
     });

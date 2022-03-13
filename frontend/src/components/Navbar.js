@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthContext } from '../store/auth-context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

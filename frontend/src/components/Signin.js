@@ -5,8 +5,6 @@ import { AuthContext } from '../store/auth-context';
 import { Link, Redirect } from 'react-router-dom';
 import FormLayout from '../layout/FormLayout';
 
-const URL = '/api/v1/users/login';
-
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
   const authContext = useContext(AuthContext);
@@ -30,7 +28,10 @@ const Signin = () => {
     e.preventDefault();
     setData({ ...data, loading: true, success: false });
     try {
-      const res = await axios.post(URL, { email, password });
+      const res = await axios.post('/api/v1/users/login', {
+        email,
+        password,
+      });
 
       authContext.login(res, () => {
         setData({
@@ -44,7 +45,6 @@ const Signin = () => {
 
       setRedirectToDashBoard(true);
     } catch (err) {
-      // console.log(err.response.data.message);
       setData({
         ...data,
         loading: false,

@@ -8,15 +8,23 @@ const Shop = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    axios.get('http://localhost:4000/api/v1/products').then((res) => {
-      console.log(res.data.data);
-      setProducts(res.data.data);
-    });
+    const viewProducts = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get('/api/v1/products');
+        const data = await res.data.data;
+        setProducts(data || []);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    viewProducts();
   }, []);
 
   return (
     <ProductsContainer>
+      {loading && <p>Loading....</p>}
       {products.map((product) => (
         <Product key={product._id} product={product} />
       ))}

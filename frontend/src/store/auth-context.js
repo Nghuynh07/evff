@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get('http://localhost:4000/api/v1/users/logout');
       localStorage.removeItem('jwt');
       setIsLoggedIn(false);
-      return res;
+      // return res;
     } catch (err) {
       console.log(err);
     }

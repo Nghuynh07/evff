@@ -12,11 +12,18 @@ const ViewProducts = () => {
   const token = auth.isAuthenticated().data.token;
 
   useEffect(() => {
-    setLoading(true);
-    axios.get('http://localhost:4000/api/v1/products').then((res) => {
-      console.log(res.data.data);
-      setProducts(res.data.data);
-    });
+    const viewProducts = async () => {
+      try {
+        setLoading(true);
+        axios.get('http://localhost:4000/api/v1/products').then((res) => {
+          console.log(res.data.data);
+          setProducts(res.data.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    viewProducts();
   }, []);
 
   const deleteProduct = async (token, productId) => {

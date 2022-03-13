@@ -38,10 +38,6 @@ const Signup = () => {
   const signup = async (event) => {
     event.preventDefault();
 
-    if (password.length < 8 && passwordConfirm.length < 8) {
-      setErrors('At least character is required');
-    }
-
     setData({ ...data, loading: true });
     try {
       const res = await axios.post(URL, data);

@@ -18,19 +18,9 @@ const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 //GLOABL Middleware
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, './frontend/build')));
+app.use(cors());
+app.options('*', cors());
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
-
-  app.use('/public', express.static(`${__dirname}/public`));
-} else {
-  app.get('/', (req, res) => {
-    res.send('API running');
-  });
-}
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -39,6 +29,8 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+app.use(compression());
 //body parser, reading data from body into req.body
 app.use(express.json());
 app.use(bodyParser.json());
@@ -56,6 +48,22 @@ app.use(function (req, res, next) {
   next();
 });
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, './frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './frontend/build', 'index.html'));
+  });
+
+  app.use('/public', express.static(`${__dirname}/public`));
+} else {
+  app.get('/', (req, res) => {
+    res.send('API running');
+  });
+}
+
+console.log(process.env.NODE_ENV);
+
 // app.use('/public', express.static('public'));
 // app.use(express.static(`${__dirname}/public`));
 app.use('/public', express.static('public'));
@@ -64,13 +72,11 @@ app.use('/public', express.static('public'));
 app.use(helmet());
 
 // app.enable('trust proxy');
-app.use(cors());
-app.options('*', cors());
 
 //Development logging
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use(morgan('dev'));
+// }
 
 //routes
 app.use('/api/v1/products', productRouter);
@@ -83,5 +89,4 @@ app.all('*', (req, res, next) => {
 });
 
 app.use(globalErrorHandler);
-app.use(compression());
 module.exports = app;

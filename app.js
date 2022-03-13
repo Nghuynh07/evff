@@ -1,5 +1,6 @@
-const path = require('path');
 const express = require('express');
+const app = express();
+const path = require('path');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -16,7 +17,6 @@ const globalErrorHandler = require('./controllers/errorController');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 //GLOABL Middleware
-const app = express();
 //body parser, reading data from body into req.body
 app.use(express.json());
 app.use(bodyParser.json());
@@ -45,11 +45,7 @@ app.use(function (req, res, next) {
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
-  console.log(process.env.NODE_ENV);
-
-  // app.use('/public', express.static(`${__dirname}/public`));
-  app.use('/public', express.static('public'));
-
+  app.use('/public', express.static(`${__dirname}/public`));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
@@ -58,7 +54,7 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API running');
   });
 }
-
+// app.use('/public', express.static('public'));
 // app.use(express.static(`${__dirname}/public`));
 app.use('/public', express.static('public'));
 

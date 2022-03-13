@@ -6,10 +6,8 @@
   "scripts": {
     "build": "cd frontend && npm run build",
     "install-client": "cd frontend && npm install",
-    "server": "nodemon server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
-    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix frontend\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix frontend\""
+    "heroku-postbuild": "npm run install-client  && npm run build",
+    "server": "nodemon server.js"
   },
   "author": "Huynh Nguyen",
   "license": "ISC",

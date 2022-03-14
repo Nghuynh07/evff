@@ -36,14 +36,20 @@ const Shop = () => {
     );
   };
 
-  return (
-    <>
-      {loadScreen()}
+  const shopProducts = () => {
+    return (
       <ProductsContainer>
         {products.map((product) => {
           return <Product key={product._id} product={product} />;
         })}
       </ProductsContainer>
+    );
+  };
+
+  return (
+    <>
+      {loadScreen()}
+      {shopProducts()}
     </>
   );
 };

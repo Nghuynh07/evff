@@ -40,9 +40,9 @@ const Shop = () => {
     <>
       {loadScreen()}
       <ProductsContainer>
-        {products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))}
+        {products.map((product) => {
+          return <Product key={product._id} product={product} />;
+        })}
       </ProductsContainer>
     </>
   );

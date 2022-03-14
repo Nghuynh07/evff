@@ -13,7 +13,7 @@ const Orders = () => {
   const loadOrders = async (token) => {
     try {
       setLoading(true);
-      const res = await axios(`http://localhost:4000/api/v1/orders`, {
+      const res = await axios(`/api/v1/orders`, {
         method: `GET`,
         headers: {
           Accept: 'application/json',

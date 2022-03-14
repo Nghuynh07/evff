@@ -11,14 +11,24 @@ import {
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../store/cart-context';
-
+import Loading from './Loading';
 const Navbar = () => {
-  const authContext = useContext(AuthContext);
   const cartContext = useContext(CartContext);
   const { itemTotal } = cartContext;
 
+  const aCtx = useContext(AuthContext);
+  const { loading, isLoggedIn, isAuthenticated, logout } = aCtx;
+
+  const loadScreen = () => {
+    return (
+      <div className="loading-container ">
+        {loading && <Loading text="You are logging out. Please wait..." />}
+      </div>
+    );
+  };
+
   return (
-    <header className="navbar">
+    <nav className="navbar">
       <div className="navbar-links-container">
         <Link className="navbar-link" to="/home">
           <FontAwesomeIcon icon={faHouseChimney} />
@@ -28,37 +38,34 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faShop} />
         </Link>
 
-        {!authContext.isLoggedIn && (
+        {!isLoggedIn && (
           <Link className="navbar-link" to="/login">
             <FontAwesomeIcon icon={faUnlock} />
           </Link>
         )}
-        {authContext.isLoggedIn &&
-        authContext.isAuthenticated() &&
-        authContext.isAuthenticated().data.data.user.role === 'user' ? (
+        {isLoggedIn &&
+        isAuthenticated() &&
+        isAuthenticated().data.data.user.role === 'user' ? (
           <Link className="navbar-link" to="/users-dashboard">
             <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
-        {authContext.isLoggedIn &&
-        authContext.isAuthenticated() &&
-        authContext.isAuthenticated().data.data.user.role === 'wholesale' ? (
+        {isLoggedIn &&
+        isAuthenticated() &&
+        isAuthenticated().data.data.user.role === 'wholesale' ? (
           <Link className="navbar-link" to="/wholesale-dashboard">
             <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
-        {authContext.isLoggedIn &&
-        authContext.isAuthenticated() &&
-        authContext.isAuthenticated().data.data.user.role === 'admin' ? (
+        {isLoggedIn &&
+        isAuthenticated() &&
+        isAuthenticated().data.data.user.role === 'admin' ? (
           <Link className="navbar-link" to="/admin-dashboard">
             <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
-        {authContext.isLoggedIn && (
-          <span
-            onClick={authContext.logout}
-            className="navbar-link navbar-logout"
-          >
+        {isLoggedIn && (
+          <span onClick={logout} className="navbar-link navbar-logout">
             <FontAwesomeIcon icon={faLock} />
           </span>
         )}
@@ -69,7 +76,7 @@ const Navbar = () => {
           <span className="navbar-cart-size">{itemTotal()}</span>
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
 

@@ -28,6 +28,48 @@ $letter-spacing: 0.13rem;
   text-transform: uppercase;
 }
 
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  p {
+    font-size: 1.8rem;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  span {
+    position: absolute;
+    width: 120px;
+    height: 35px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    animation: loading 2s linear infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(180deg);
+  }
+  100% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -45,6 +87,7 @@ html {
 
 //DASHBOARD CONTAINER
 .dashboard-container {
+  position: relative;
   width: 80vw;
   margin: 5vh auto;
   display: grid;
@@ -138,6 +181,7 @@ html {
 }
 //FORM
 .form {
+  position: relative;
   margin: auto;
   width: 100%;
   padding: 2rem;
@@ -182,6 +226,7 @@ select {
 }
 
 .form-layout {
+  position: relative;
   width: 40%;
   margin: 10vh auto;
   display: grid;
@@ -189,6 +234,7 @@ select {
   grid-template-rows: minmax(min-content, 1fr);
   justify-content: center;
   align-content: center;
+  perspective: 200px;
 }
 
 //BUTTON
@@ -229,31 +275,26 @@ select {
 }
 
 //ERROR
-.error-signin,
-.error-signup {
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
+//
+
+.error {
   font-size: 1.2rem;
   color: salmon;
 }
 
-// .firstNameError,
-// .lastNameError,
-// .emailError,
-// .passwordError,
-// .confirmPasswordError {
-//   position: absolute;
-//   display: inline-block;
-//   right: 2.2rem;
-//   color: red;
-//   font-size: 1.2rem;
-// }
 //INPUT
 .input {
   display: flex;
   flex-direction: column;
   position: relative;
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    span {
+      margin-bottom: 0.5rem;
+    }
+  }
   &-input {
     font-size: 1.8rem;
     padding: 1rem;
@@ -303,6 +344,7 @@ select {
 
 //NAVBAR
 .navbar {
+  position: relative;
   height: 8vh;
   width: 100%;
   &-links-container {
@@ -370,6 +412,7 @@ select {
 
 //HEADER
 .header {
+  position: relative;
   min-height: 92vh;
   position: relative;
   background-color: rgba(0, 0, 0, 0.7);
@@ -716,45 +759,6 @@ select {
     margin-bottom: 1rem;
   }
 }
-
-// .footer {
-//   height: 8vh;
-//   width: 100%;
-//   background-color: #212121;
-//   background: #16222a; /* fallback for old browsers */
-//   background: -webkit-linear-gradient(
-//     to right,
-//     #16222a,
-//     #3a6073
-//   ); /* Chrome 10-25, Safari 5.1-6 */
-//   background: linear-gradient(
-//     to right,
-//     #43667d,
-//     #3a6073
-//   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-//   overflow: hidden;
-//   flex-direction: row;
-//   @include displayFlex();
-//   &-link {
-//     height: 100%;
-//     font-size: 3rem;
-//     padding: 0.5rem 2rem;
-//     color: #fff;
-//     display: flex;
-//     align-items: center;
-//     transition: all 500ms ease;
-//     &:not(first-child) {
-//       margin-left: 1rem;
-//     }
-//     &:not(last-child) {
-//       margin-right: 1rem;
-//     }
-//     &:hover {
-//       transform: translateY(-10px);
-//       background: #283048;
-//     }
-//   }
-// }
 
 // MEDIA QUERIES
 

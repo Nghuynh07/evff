@@ -11,9 +11,12 @@ const Input = ({
 }) => {
   return (
     <div className="input">
-      <label htmlFor={htmlFor} className="input-label">
-        {label}
-      </label>
+      <div>
+        <label htmlFor={htmlFor} className="input-label">
+          {label}
+        </label>
+        <span className="error-signup"></span>
+      </div>
       <input
         className="input-input"
         type={type}

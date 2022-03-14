@@ -5,10 +5,12 @@ export const AuthContext = createContext({
   login: () => {},
   logout: () => {},
   isAuthenticated: () => {},
+  loading: false,
 });
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setIsLoading] = useState(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const loggedInUser = localStorage.getItem('jwt');
@@ -19,13 +21,17 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
+    setIsLoading(true);
     try {
       const res = await axios.get('http://localhost:4000/api/v1/users/logout');
-      localStorage.removeItem('jwt');
-      setIsLoggedIn(false);
-      // return res;
+      setTimeout(() => {
+        localStorage.removeItem('jwt');
+        setIsLoggedIn(false);
+        setIsLoading(false);
+      }, 1500);
+      return res;
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
     }
   };
 
@@ -53,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     isAuthenticated,
+    loading,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

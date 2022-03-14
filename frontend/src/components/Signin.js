@@ -1,56 +1,45 @@
 import React, { useState, useContext } from 'react';
-import Input from './Input';
 import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import FormLayout from '../layout/FormLayout';
+import Loading from './Loading';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
   const authContext = useContext(AuthContext);
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-    error: '',
-    loading: false,
-    success: false,
-  });
+  const { login } = authContext;
 
-  const { email, password, error, loading, success } = data;
+  const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const inputHandler = (e) => {
-    const inputData = { ...data };
-    inputData[e.target.name] = e.target.value;
-    setData(inputData);
+  const emailOnChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const passwordOnChange = (e) => {
+    setPassword(e.target.value);
   };
 
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
-    setData({ ...data, loading: true, success: false });
     try {
-      const res = await axios.post('http://localhost:4000/api/v1/users/login', {
+      const res = await axios.post('/api/v1/users/login', {
         email,
         password,
       });
-
-      authContext.login(res, () => {
-        setData({
-          ...data,
-          email: '',
-          password: '',
-          loading: false,
-          success: true,
+      setLoading(true);
+      setTimeout(() => {
+        login(res, () => {
+          setLoading(false);
         });
-      });
-
-      setRedirectToDashBoard(true);
+        setRedirectToDashBoard(true);
+      }, 1500);
     } catch (err) {
-      setData({
-        ...data,
-        loading: false,
-        success: false,
-        error: err.response.data.message,
-      });
+      setLoading(false);
+      setError(err.response.data.message);
     }
   };
 
@@ -72,42 +61,65 @@ const Signin = () => {
     }
   };
 
-  return (
-    <FormLayout>
-      {redirectUser()}
-      <form className="form" onSubmit={loginSubmitHandler}>
-        {error && <p className="error-signin">{error}</p>}
-        <Input
-          htmlFor="email"
-          label="Email"
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={inputHandler}
-        />
-        <Input
-          htmlFor="password"
-          label="Password"
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={inputHandler}
-        />
+  const loadScreen = () => {
+    return (
+      <div className="loading-container ">
+        {loading && <Loading text="Please wait..." />}
+      </div>
+    );
+  };
+
+  const showForm = () => {
+    return (
+      <form onSubmit={loginSubmitHandler} className="form">
+        <div className="input">
+          <div>
+            <label htmlFor="email" id="email" className="input-label">
+              Email
+            </label>
+            <span className="error">{error && <span>{error}</span>}</span>
+          </div>
+          <input
+            name="email"
+            type="email"
+            onChange={emailOnChange}
+            value={email}
+            className="input-input"
+          />
+        </div>
+
+        <div className="input">
+          <div>
+            <label htmlFor="password" id="password" className="input-label">
+              Password
+            </label>
+            <span className="error"></span>
+          </div>
+          <input
+            name="password"
+            type="password"
+            onChange={passwordOnChange}
+            value={password}
+            className="input-input"
+          />
+        </div>
         <div className="signup-action-container">
-          <button
-            className="signin-button"
-            type="submit"
-            onClick={authContext.logout}
-          >
-            Login
+          <button type="submit" className="signin-button">
+            Signin
           </button>
-          <Link className="signup-link" to="/signup">
-            New User?
+          <Link to="/signup" className="signup-link">
+            New user?
           </Link>
         </div>
       </form>
+    );
+  };
+
+  return (
+    <FormLayout>
+      {loadScreen()}
+      {redirectUser()}
+      {showForm()}
     </FormLayout>
   );
 };

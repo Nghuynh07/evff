@@ -5,13 +5,13 @@ import Checkout from '../components/Checkout';
 import { CartContext } from '../store/cart-context';
 const Cart = () => {
   const cCxt = useContext(CartContext);
-
+  const { getCart } = cCxt;
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
 
   useEffect(() => {
-    setItems(cCxt.getCart() || []);
-  }, [run]);
+    setItems(getCart() || []);
+  }, [run, getCart]);
 
   const total = () => {
     return items.reduce((current, next) => {

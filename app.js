@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -18,8 +18,19 @@ const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 //GLOABL Middleware
 
-app.use(cors());
-app.options('*', cors());
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, './frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './frontend/build', 'index.html'));
+  });
+
+  app.use('/public', express.static(`${__dirname}/public`));
+} else {
+  app.get('/', (req, res) => {
+    res.send('API running');
+  });
+}
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -29,6 +40,9 @@ app.use(function (req, res, next) {
   );
   next();
 });
+app.enable('trust proxy');
+app.use(cors());
+app.options('*', cors());
 
 app.use(compression());
 //body parser, reading data from body into req.body
@@ -48,20 +62,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, './frontend/build')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './frontend/build', 'index.html'));
-  });
-
-  app.use('/public', express.static(`${__dirname}/public`));
-} else {
-  app.get('/', (req, res) => {
-    res.send('API running');
-  });
-}
-
 console.log(process.env.NODE_ENV);
 
 // app.use('/public', express.static('public'));
@@ -70,8 +70,6 @@ app.use('/public', express.static('public'));
 
 //For security HTTP headers
 app.use(helmet());
-
-// app.enable('trust proxy');
 
 //Development logging
 // if (process.env.NODE_ENV === 'development') {

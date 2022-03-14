@@ -11,9 +11,9 @@ const Shop = () => {
     const viewProducts = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('/api/v1/products');
+        const res = await axios.get(`http://localhost:4000/api/v1/products`);
         const data = await res.data.data;
-        setProducts(data || []);
+        setProducts(data);
         setLoading(false);
       } catch (err) {
         console.log(err);

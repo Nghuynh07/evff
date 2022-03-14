@@ -15,6 +15,7 @@ import { CartContext } from '../store/cart-context';
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const cartContext = useContext(CartContext);
+  const { itemTotal } = cartContext;
 
   return (
     <header className="navbar">
@@ -65,7 +66,7 @@ const Navbar = () => {
           <Link className="navbar-link" to="/cart">
             <FontAwesomeIcon icon={faCartShopping} />
           </Link>
-          <span className="navbar-cart-size">{cartContext.itemTotal()}</span>
+          <span className="navbar-cart-size">{itemTotal()}</span>
         </div>
       </div>
     </header>

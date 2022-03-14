@@ -28,7 +28,7 @@ const Signin = () => {
     e.preventDefault();
     setData({ ...data, loading: true, success: false });
     try {
-      const res = await axios.post('/api/v1/users/login', {
+      const res = await axios.post('http://localhost:4000/api/v1/users/login', {
         email,
         password,
       });

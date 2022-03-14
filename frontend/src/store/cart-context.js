@@ -1,4 +1,4 @@
-import { createContext, useEffect } from 'react';
+import { createContext } from 'react';
 
 export const CartContext = createContext({
   getCart: () => {},
@@ -10,13 +10,6 @@ export const CartContext = createContext({
 });
 
 export const CartProvider = ({ children }) => {
-  useEffect(() => {
-    const cart = localStorage.getItem('cart');
-    if (cart) {
-      getCart();
-    }
-  }, []);
-
   //GET CART
 
   const getCart = () => {

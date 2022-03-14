@@ -16,7 +16,9 @@ const Shop = () => {
         setLoading(true);
         SetError('');
         setTimeout(() => {
-          setProducts([...data]);
+          setProducts((previous) => {
+            return [...previous];
+          });
           setLoading(false);
         }, 500);
       } catch (err) {

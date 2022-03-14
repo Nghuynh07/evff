@@ -9,21 +9,20 @@ const Shop = () => {
   const [error, SetError] = useState('');
 
   const viewProducts = async () => {
-    try {
-      const res = await axios.get(`http://localhost:4000/api/v1/products`);
-      // console.log(res.data.data);
-      return await res.data.data;
-    } catch (err) {
-      setLoading(false);
-      SetError('Something went wrong. Please try again...');
-    }
+    return await axios.get(`/api/v1/products`);
   };
 
   useEffect(() => {
-    viewProducts().then((res) => {
-      console.log(res);
-      setProducts(res);
-    });
+    viewProducts()
+      .then((res) => {
+        const data = res.data.data;
+        console.log(data);
+        setProducts(data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        err && SetError('Something went wrong. Please try again...');
+      });
   }, []);
 
   const loadScreen = () => {

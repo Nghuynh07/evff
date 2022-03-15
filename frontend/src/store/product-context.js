@@ -10,17 +10,17 @@ export const ProductContext = createContext({
 
 export const ProductProvider = ({ children }) => {
   const getProducts = async () => {
-    return await axios(`http://localhost:4000/api/v1/products`, {
+    return await axios(`/api/v1/products`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
         Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
     });
   };
 
   const createOrder = async (token, createOrderData) => {
-    return await axios(`http://localhost:4000/api/v1/orders`, {
+    return await axios(`/api/v1/orders`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -35,7 +35,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const getOrders = async (token) => {
-    return await axios(`http://localhost:4000/api/v1/orders`, {
+    return await axios(`/api/v1/orders`, {
       method: `GET`,
       headers: {
         Accept: 'application/json',
@@ -46,28 +46,22 @@ export const ProductProvider = ({ children }) => {
   };
 
   const getOrderHistory = async (token) => {
-    return await axios.get(
-      'http://localhost:4000/api/v1/orders/userOrderHistory',
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    return await axios.get('/api/v1/orders/userOrderHistory', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   const deleteProduct = async (token, productId) => {
-    let productToBeDeleted = await axios(
-      `http://localhost:4000/api/v1/products/${productId}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((res) => {});
+    let productToBeDeleted = await axios(`/api/v1/products/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {});
     return productToBeDeleted;
   };
   const values = {
@@ -75,6 +69,7 @@ export const ProductProvider = ({ children }) => {
     getOrders,
     getOrderHistory,
     createOrder,
+    deleteProduct,
   };
 
   return (

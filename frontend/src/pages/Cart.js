@@ -5,7 +5,7 @@ import Checkout from '../components/Checkout';
 import { CartContext } from '../store/cart-context';
 const Cart = () => {
   const cCxt = useContext(CartContext);
-  const { getCart } = cCxt;
+  const { getCart, itemTotal } = cCxt;
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
 
@@ -22,7 +22,7 @@ const Cart = () => {
   return (
     <CartContainer>
       <Checkout
-        quantity={cCxt.itemTotal()}
+        quantity={itemTotal()}
         products={items}
         run={run}
         setRun={setRun}

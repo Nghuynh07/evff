@@ -1,20 +1,27 @@
 import { useContext, useState, useEffect } from 'react';
-import { getUserOrderHistory } from './api-user';
 import { AuthContext } from '../store/auth-context';
+import { ProductContext } from '../store/product-context';
 
 const PurchaseHistory = () => {
   const [orderHistory, setOrderHistory] = useState([]);
-  const auth = useContext(AuthContext);
-  const token = auth.isAuthenticated().data.token;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { isAuthenticated } = useContext(AuthContext);
+  const token = isAuthenticated().data.token;
+  const { getOrderHistory } = useContext(ProductContext);
 
   const getPurchasedOrders = (token) => {
-    getUserOrderHistory(token)
-      .then((data) => {
-        setOrderHistory(data.data.orders);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    setLoading(true);
+    setTimeout(() => {
+      getOrderHistory(token)
+        .then((res) => {
+          setOrderHistory(res.data.orders);
+        })
+        .catch((err) => {
+          setLoading(true);
+          setError('Something went wrong. Please try again...');
+        });
+    }, 500);
   };
 
   useEffect(() => {
@@ -32,7 +39,7 @@ const PurchaseHistory = () => {
     return date.toLocaleString('en-US', options);
   };
 
-  const getOrderHistory = () => {
+  const loadingOrderHistory = () => {
     return (
       <>
         <div className="purchase">
@@ -72,7 +79,7 @@ const PurchaseHistory = () => {
       </>
     );
   };
-  return <div>{getOrderHistory()}</div>;
+  return <div>{loadingOrderHistory()}</div>;
 };
 
 export default PurchaseHistory;

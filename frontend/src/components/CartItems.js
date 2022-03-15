@@ -5,7 +5,6 @@ import { faXmark, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../store/cart-context';
 const CartItems = ({ item, setRun = (f) => f, run }) => {
   const cartContext = useContext(CartContext);
-
   return (
     <div className="cart-items">
       <ShowImage photo={item.photo} imageStyle="cart-items-image" />

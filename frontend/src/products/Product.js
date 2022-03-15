@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import ShowImage from '../components/ShowImage';
 import { CartContext } from '../store/cart-context';
 
@@ -8,7 +8,7 @@ export const Card = ({ children }) => {
 
 const Product = ({ product }) => {
   const cartContext = useContext(CartContext);
-  const { addItem, getCart } = cartContext;
+  const { addItem } = cartContext;
 
   const { photo, name, price, packaging } = product;
 

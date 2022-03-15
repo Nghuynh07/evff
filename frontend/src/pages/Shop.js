@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Product from '../products/Product';
-import axios from 'axios';
 import ProductsContainer from '../layout/ProductsContainer';
 import Loading from '../components/Loading';
+import { ProductContext } from '../store/product-context';
+import { useContext } from 'react';
+import { useViewHook } from '../hooks/view-hooks';
 const Shop = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, SetError] = useState('');
-
-  const viewProducts = async () => {
-    return await axios.get(`/api/v1/products`).catch((err) => {
-      setLoading(false);
-      err && SetError('Something went wrong. Please try again...');
-    });
-  };
+  const { getProducts } = useContext(ProductContext);
+  const { items, loading, error, view } = useViewHook(getProducts);
 
   useEffect(() => {
-    viewProducts().then((res) => {
-      console.log(res.data.data);
-      setProducts(res.data.data);
-    });
+    view();
   }, []);
 
   const loadScreen = () => {
@@ -34,7 +25,7 @@ const Shop = () => {
   const shopProducts = () => {
     return (
       <ProductsContainer>
-        {products.map((product) => {
+        {items.map((product) => {
           return <Product key={product._id} product={product} />;
         })}
       </ProductsContainer>

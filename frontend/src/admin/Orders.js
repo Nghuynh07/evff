@@ -1,39 +1,31 @@
-import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import Loading from '../components/Loading';
+import { ProductContext } from '../store/product-context';
 
 const Orders = () => {
-  const auth = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
+  const { getOrders } = useContext(ProductContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const token = auth.isAuthenticated().data.token;
+  const token = isAuthenticated().data.token;
 
-  const loadOrders = async (token) => {
-    try {
-      setLoading(true);
-      const res = await axios(`/api/v1/orders`, {
-        method: `GET`,
-        headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.data;
-      setTimeout(() => {
-        setOrders(data);
-        setLoading(false);
-        setError('');
-      }, 500);
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-      setError('Something went wrong. Please try again...');
-    }
+  const loadOrders = (token) => {
+    setLoading(true);
+    setTimeout(() => {
+      getOrders(token)
+        .then((res) => {
+          setOrders(res.data);
+          setLoading(false);
+          setError('');
+        })
+        .catch((err) => {
+          setLoading(true);
+          setError('Something went wrong. Please try again...');
+        });
+    }, 500);
   };
-
   useEffect(() => {
     loadOrders(token);
   }, []);

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import { Link } from 'react-router-dom';
-import { createOrder } from '../admin/apiAdmin';
+import { ProductContext } from '../store/product-context';
 
 const Checkout = ({
   quantity,
@@ -10,7 +10,8 @@ const Checkout = ({
   run = undefined,
   setRun = (f) => f,
 }) => {
-  const auth = useContext(AuthContext);
+  const { isAuthenticated, isLoggedIn } = useContext(AuthContext);
+  const { createOrder } = useContext(ProductContext);
   const [data, setData] = useState({
     loading: false,
     success: false,
@@ -31,12 +32,12 @@ const Checkout = ({
       products,
       address,
       amount:
-        auth.isAuthenticated().data.data.user.role === 'wholesale'
+        isAuthenticated().data.data.user.role === 'wholesale'
           ? total() * 0.6
           : total(),
     };
     setTimeout(() => {
-      createOrder(auth.isAuthenticated().data.token, orderData)
+      createOrder(isAuthenticated().data.token, orderData)
         .then((res) => {
           localStorage.removeItem('cart');
           setRun(!run);
@@ -67,7 +68,7 @@ const Checkout = ({
   }
 
   const showCheckout = () => {
-    return auth.isAuthenticated() ? (
+    return isAuthenticated() ? (
       showButton
     ) : (
       <Link to="/login">
@@ -98,17 +99,17 @@ const Checkout = ({
               item(s) in your cart
             </h3>
           )}
-          {auth.isLoggedIn &&
-            auth.isAuthenticated() &&
-            auth.isAuthenticated().data.data.user.role === 'wholesale' && (
+          {isLoggedIn &&
+            isAuthenticated() &&
+            isAuthenticated().data.data.user.role === 'wholesale' && (
               <h3 className="checkout-discount">Discount: 40%</h3>
             )}
           {
             <h1 className="checkout-total">
               TOTAL: $
-              {auth.isLoggedIn &&
-              auth.isAuthenticated() &&
-              auth.isAuthenticated().data.data.user.role === 'wholesale'
+              {isLoggedIn &&
+              isAuthenticated() &&
+              isAuthenticated().data.data.user.role === 'wholesale'
                 ? (total() * 0.6).toFixed(2)
                 : total().toFixed(2)}
             </h1>

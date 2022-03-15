@@ -1,54 +1,26 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Loading from '../components/Loading';
-const ViewProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const auth = useContext(AuthContext);
-  const token = auth.isAuthenticated().data.token;
+import { ProductContext } from '../store/product-context';
+import { useViewHook } from '../hooks/view-hooks';
 
-  const [error, SetError] = useState('');
+const ViewProducts = () => {
+  const { getProducts, deleteProduct } = useContext(ProductContext);
+  const { isAuthenticated } = useContext(AuthContext);
+  const token = isAuthenticated().data.token;
+  const { items, loading, error, view } = useViewHook(getProducts);
 
   useEffect(() => {
-    const viewProducts = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(`http://localhost:4000/api/v1/products`);
-        const data = await res.data.data;
-        SetError('');
-        setTimeout(() => {
-          setProducts(data);
-          setLoading(false);
-        }, 1000);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-        SetError('Something went wrong. Please try again...');
-      }
-    };
-    viewProducts();
+    view();
   }, []);
-
-  const deleteProduct = async (token, productId) => {
-    let productToBeDeleted = await axios(
-      `http://localhost:4000/api/v1/products/${productId}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((res) => {});
-    return productToBeDeleted;
-  };
 
   const handleDelete = (productID) => {
     deleteProduct(token, productID);
   };
+
   const loadScreen = () => {
     return (
       <div className="loading-container ">
@@ -72,7 +44,7 @@ const ViewProducts = () => {
           </tr>
         </thead>
         <tbody className="table-body">
-          {products.map((product) => (
+          {items.map((product) => (
             <tr key={product._id} className="table-body__row">
               <td className="table-body__data">{product.name}</td>
               <td className="table-body__data">

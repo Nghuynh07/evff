@@ -9,6 +9,7 @@ import {
   faUser,
   faUnlock,
   faLock,
+  faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../store/cart-context';
 import Loading from './Loading';
@@ -28,53 +29,58 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-links-container">
-        <Link className="navbar-link" to="/home">
-          <FontAwesomeIcon icon={faHouseChimney} />
+    <nav className="navbar flex-center">
+      <Link to="/home" className="logo flex-center">
+        echo<span>valley</span>
+      </Link>
+      <div className="navbar-infos">
+        <Link className="link center" to="/home" title="Home">
+          home
+        </Link>
+        <Link className="link" to="/contact" title="Home">
+          Contact
         </Link>
 
-        <Link className="navbar-link" to="/shop">
-          <FontAwesomeIcon icon={faShop} />
+        <Link className="link" to="/cart" title="Cart">
+          cart
+          <span className="navbar-cart-size">{itemTotal()}</span>
         </Link>
+      </div>
 
+      <div className="navbar-auth-navigation">
         {!isLoggedIn && (
-          <Link className="navbar-link" to="/login">
-            <FontAwesomeIcon icon={faUnlock} />
+          <Link className="login-btn" to="/login" title="Login">
+            login
           </Link>
         )}
         {isLoggedIn &&
         isAuthenticated() &&
         isAuthenticated().data.data.user.role === 'user' ? (
-          <Link className="navbar-link" to="/users-dashboard">
+          <Link className="link" to="/users-dashboard" title="Dashboard">
             <FontAwesomeIcon icon={faUser} />
+            profile
           </Link>
         ) : null}
         {isLoggedIn &&
         isAuthenticated() &&
         isAuthenticated().data.data.user.role === 'wholesale' ? (
-          <Link className="navbar-link" to="/wholesale-dashboard">
+          <Link className="link" to="/wholesale-dashboard" title="Dashboard">
             <FontAwesomeIcon icon={faUser} />
+            profile
           </Link>
         ) : null}
         {isLoggedIn &&
         isAuthenticated() &&
         isAuthenticated().data.data.user.role === 'admin' ? (
-          <Link className="navbar-link" to="/admin-dashboard">
+          <Link className="link" to="/admin-dashboard" title="Dashboard">
             <FontAwesomeIcon icon={faUser} />
           </Link>
         ) : null}
         {isLoggedIn && (
-          <span onClick={logout} className="navbar-link navbar-logout">
-            <FontAwesomeIcon icon={faLock} />
+          <span onClick={logout} className="logout-btn" title="Logout">
+            {/* <FontAwesomeIcon icon={faLock} /> */}logout
           </span>
         )}
-        <div className="navbar-cart">
-          <Link className="navbar-link" to="/cart">
-            <FontAwesomeIcon icon={faCartShopping} />
-          </Link>
-          <span className="navbar-cart-size">{itemTotal()}</span>
-        </div>
       </div>
     </nav>
   );

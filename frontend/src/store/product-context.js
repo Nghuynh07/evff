@@ -10,7 +10,7 @@ export const ProductContext = createContext({
 
 export const ProductProvider = ({ children }) => {
   const getProducts = async () => {
-    return await axios(`/api/v1/products`, {
+    return await fetch(`http://localhost:4000/api/v1/products`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

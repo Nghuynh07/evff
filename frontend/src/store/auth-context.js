@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       }, 1500);
       return res;
     } catch (err) {
-      setIsLoading(false);
+      setIsLoading(true);
     }
   };
 

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import FormLayout from '../layout/FormLayout';
 import Loading from './Loading';
+import Signup from './Signup';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
@@ -14,6 +15,8 @@ const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const history = useHistory();
 
   const emailOnChange = (e) => {
     setEmail(e.target.value);
@@ -26,7 +29,7 @@ const Signin = () => {
   const loginSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/v1/users/login', {
+      const res = await axios.post('http://localhost:4000/api/v1/users/login', {
         email,
         password,
       });
@@ -71,47 +74,40 @@ const Signin = () => {
 
   const showForm = () => {
     return (
-      <form onSubmit={loginSubmitHandler} className="form">
-        <div className="input">
-          <div>
-            <label htmlFor="email" id="email" className="input-label">
-              Email
-            </label>
-            <span className="error">{error && <span>{error}</span>}</span>
-          </div>
-          <input
-            name="email"
-            type="email"
-            onChange={emailOnChange}
-            value={email}
-            className="input-input"
-          />
-        </div>
-
-        <div className="input">
-          <div>
-            <label htmlFor="password" id="password" className="input-label">
-              Password
-            </label>
-            <span className="error"></span>
-          </div>
-          <input
-            name="password"
-            type="password"
-            onChange={passwordOnChange}
-            value={password}
-            className="input-input"
-          />
-        </div>
-        <div className="signup-action-container">
-          <button type="submit" className="signin-button">
-            Signin
+      <div className="form-wrapper flex-center">
+        <div className="login hidden flex-center">
+          <button onClick={() => history.push('/signup')} className="new-user">
+            Sign Up
           </button>
-          <Link to="/signup" className="signup-link">
-            New user?
-          </Link>
+          <h2 className="form-heading">Login</h2>
+          <form onSubmit={loginSubmitHandler} className="login-form">
+            <div className="error-wrapper">
+              {error && <p className="login-error">{error}</p>}
+            </div>
+            <input
+              name="email"
+              type="email"
+              onChange={emailOnChange}
+              value={email}
+              className="login-form-input"
+              placeholder="Your Email"
+            />
+            <input
+              name="password"
+              type="password"
+              onChange={passwordOnChange}
+              value={password}
+              className="login-form-input"
+              placeholder="Your Password"
+            />
+
+            <button type="submit" className="form-signin-btn">
+              Signin
+            </button>
+          </form>
         </div>
-      </form>
+        {/* <Signup /> */}
+      </div>
     );
   };
 

@@ -14,7 +14,7 @@ import WholeSaleDashboard from './wholesale/WholeSaleDashboard';
 
 function App() {
   return (
-    <>
+    <div className="container">
       <Navbar />
       <Switch>
         <Route path="/" exact>
@@ -42,7 +42,7 @@ function App() {
           component={WholeSaleDashboard}
         />
       </Switch>
-    </>
+    </div>
   );
 }
 

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Product from '../products/Product';
 import ProductsContainer from '../layout/ProductsContainer';
 import Loading from '../components/Loading';
 import { ProductContext } from '../store/product-context';
-import { useContext } from 'react';
 import { useViewHook } from '../hooks/view-hooks';
 const Shop = () => {
   const { getProducts } = useContext(ProductContext);

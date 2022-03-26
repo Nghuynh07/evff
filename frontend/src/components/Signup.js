@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import Loading from './Loading';
 import { useEffect } from 'react';
 
-const URL = '/api/v1/users/signup';
+const URL = 'http://localhost:4000/api/v1/users/signup';
 const Signup = () => {
   const aCtx = useContext(AuthContext);
   const { login, isAuthenticated } = aCtx;
@@ -51,6 +51,7 @@ const Signup = () => {
         password,
         passwordConfirm,
       });
+      console.log(res);
       setLoading(true);
       setTimeout(() => {
         login(res, () => {
@@ -62,10 +63,10 @@ const Signup = () => {
         setRedirectToDashBoard(true);
       }, 3000);
     } catch (err) {
-      if (err) {
-        setLoading(false);
-        setErrors(err.response.data.error.errors);
-      }
+      setLoading(false);
+      // console.log(err.response.data.error.errors);
+      const error = await err.response.data.error.errors;
+      setErrors(error);
     }
   };
 
@@ -84,106 +85,82 @@ const Signup = () => {
 
   const showForm = () => {
     return (
-      <form onSubmit={signup} className="form">
-        <div className="input">
-          <div>
-            <label htmlFor="firstName" id="firstName" className="input-label">
-              First name
-            </label>
-            <span className="error">
-              {errors.firstName && <span>{errors.firstName.message}</span>}
-            </span>
-          </div>
-          <input
-            name="firstName"
-            type="text"
-            onChange={firstNameOnChange}
-            value={firstName}
-            className="input-input"
-          />
-        </div>
-
-        <div className="input">
-          <div>
-            <label htmlFor="lastName" id="lastName" className="input-label">
-              Last name
-            </label>
-            <span className="error">
-              {errors.lastName && <span>{errors.lastName.message}</span>}
-            </span>
-          </div>
-          <input
-            name="lastName"
-            type="text"
-            onChange={lastNameOnChange}
-            value={lastName}
-            className="input-input"
-          />
-        </div>
-
-        <div className="input">
-          <div>
-            <label htmlFor="email" id="email" className="input-label">
-              Email
-            </label>
-            <span className="error">
-              {errors.email && <span>{errors.email.message}</span>}
-            </span>
-          </div>
-          <input
-            name="email"
-            type="email"
-            onChange={emailOnChange}
-            value={email}
-            className="input-input"
-          />
-        </div>
-
-        <div className="input">
-          <div>
-            <label htmlFor="password" id="password" className="input-label">
-              Password
-            </label>
-            <span className="error">
-              {errors.password && <span>{errors.password.message}</span>}
-            </span>
-          </div>
-          <input
-            name="password"
-            type="password"
-            onChange={passwordOnChange}
-            value={password}
-            className="input-input"
-          />
-        </div>
-
-        <div className="input">
-          <div>
-            <label
-              htmlFor="passwordConfirm"
-              id="passwordConfirm"
-              className="input-label"
-            >
-              Confirm Password
-            </label>
-            <span className="error">
-              {errors.passwordConfirm && (
-                <span>{errors.passwordConfirm.message}</span>
+      <div className="form-wrapper flex-center">
+        <div className="signup hidden flex-center">
+          <form onSubmit={signup} className="signup-form flex-center">
+            <div className="error-wrapper">
+              {errors.firstName && (
+                <p className="signup-error">{errors.firstName.message}</p>
               )}
-            </span>
-          </div>
-          <input
-            name="passwordConfirm"
-            className="input-input"
-            type="password"
-            onChange={passwordConfirmOnChange}
-            value={passwordConfirm}
-          />
+            </div>
+            <input
+              name="firstName"
+              type="text"
+              onChange={firstNameOnChange}
+              value={firstName}
+              className="signup-form-input"
+              placeholder="First Name"
+            />
+            <div className="error-wrapper">
+              {errors.lastName && (
+                <p className="signup-error">{errors.lastName.message}</p>
+              )}
+            </div>
+            <input
+              name="lastName"
+              type="text"
+              onChange={lastNameOnChange}
+              value={lastName}
+              className="signup-form-input"
+              placeholder="Last Name"
+            />
+            <div className="error-wrapper">
+              {errors.email && (
+                <p className="signup-error">{errors.email.message}</p>
+              )}
+            </div>
+            <input
+              name="email"
+              type="email"
+              onChange={emailOnChange}
+              value={email}
+              className="signup-form-input"
+              placeholder="Email"
+            />
+            <div className="error-wrapper">
+              {errors.password && (
+                <p className="signup-error">{errors.password.message}</p>
+              )}
+            </div>
+            <input
+              name="password"
+              type="password"
+              onChange={passwordOnChange}
+              value={password}
+              className="signup-form-input"
+              placeholder="Password"
+            />
+            <div className="error-wrapper">
+              {errors.passwordConfirm && (
+                <p className="signup-error">{errors.passwordConfirm.message}</p>
+              )}
+            </div>
+            <input
+              name="passwordConfirm"
+              className="signup-form-input"
+              type="password"
+              onChange={passwordConfirmOnChange}
+              value={passwordConfirm}
+              placeholder="Confirm Password"
+            />
+
+            <button type="submit" className="form-signup-btn">
+              Signup
+            </button>
+          </form>
+          <h1 className="form-heading">Signup</h1>
         </div>
-        <button type="submit" className="signup-button">
-          Signup
-        </button>
-      </form>
+      </div>
     );
   };
 

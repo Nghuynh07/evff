@@ -19,37 +19,32 @@ const WholeSaleDashboard = () => {
 
   const userLinks = () => {
     return (
-      <ul className="dashboard">
-        <li className="dashboard-item">
-          <Link
-            className="dashboard-link"
-            to="/wholesale-dashboard/update-profile"
-          >
-            Update Profile
-          </Link>
-        </li>
-        <li className="dashboard-item">
-          <Link
-            className="dashboard-link"
-            to="/wholesale-dashboard/update-password"
-          >
-            Update Password
-          </Link>
-        </li>
-        <li className="dashboard-item">
-          <Link className="dashboard-link" to="/cart">
-            Cart
-          </Link>
-        </li>
-        <li className="dashboard-item">
-          <Link
-            className="dashboard-link"
-            to="/wholesale-dashboard/order-history"
-          >
-            Order History
-          </Link>
-        </li>
-      </ul>
+      <div className="dashboard-links-wrapper flex-center">
+        <Link
+          className="dashboard-link"
+          to="/wholesale-dashboard/update-profile"
+        >
+          Update Profile
+        </Link>
+
+        <Link
+          className="dashboard-link"
+          to="/wholesale-dashboard/update-password"
+        >
+          Update Password
+        </Link>
+
+        <Link className="dashboard-link" to="/cart">
+          Cart
+        </Link>
+
+        <Link
+          className="dashboard-link"
+          to="/wholesale-dashboard/order-history"
+        >
+          Order History
+        </Link>
+      </div>
     );
   };
 
@@ -74,7 +69,7 @@ const WholeSaleDashboard = () => {
   return (
     <DashboardContainer>
       {userLinks()}
-      {userInfo()}
+      {/* {userInfo()} */}
       <Route path="/wholesale-dashboard/:update-password">
         <UpdatePassword />
       </Route>

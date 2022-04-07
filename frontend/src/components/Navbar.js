@@ -34,16 +34,30 @@ const Navbar = () => {
         echo<span>valley</span>
       </Link>
       <div className="navbar-infos">
-        <Link className="link center" to="/home" title="Home">
+        <Link className="link" to="/home" title="Home">
           home
+        </Link>
+        <Link className="link" to="/u-pick" title="Home">
+          U-Pick
+        </Link>
+        <Link className="link" to="/shop" title="Home">
+          Shop
+        </Link>
+        <Link className="link" to="/livestock" title="Home">
+          Livestock
+        </Link>
+        <Link className="link" to="/aquaponics" title="Home">
+          Aquaponics
+        </Link>
+        <Link className="link" to="/news" title="Home">
+          News
         </Link>
         <Link className="link" to="/contact" title="Home">
           Contact
         </Link>
-
         <Link className="link" to="/cart" title="Cart">
-          cart
-          <span className="navbar-cart-size">{itemTotal()}</span>
+          Cart
+          {/* <span className="navbar-cart-size">{itemTotal()}</span> */}
         </Link>
       </div>
 
@@ -58,7 +72,6 @@ const Navbar = () => {
         isAuthenticated().data.data.user.role === 'user' ? (
           <Link className="link" to="/users-dashboard" title="Dashboard">
             <FontAwesomeIcon icon={faUser} />
-            profile
           </Link>
         ) : null}
         {isLoggedIn &&
@@ -66,7 +79,6 @@ const Navbar = () => {
         isAuthenticated().data.data.user.role === 'wholesale' ? (
           <Link className="link" to="/wholesale-dashboard" title="Dashboard">
             <FontAwesomeIcon icon={faUser} />
-            profile
           </Link>
         ) : null}
         {isLoggedIn &&
@@ -78,7 +90,7 @@ const Navbar = () => {
         ) : null}
         {isLoggedIn && (
           <span onClick={logout} className="logout-btn" title="Logout">
-            {/* <FontAwesomeIcon icon={faLock} /> */}logout
+            logout
           </span>
         )}
       </div>

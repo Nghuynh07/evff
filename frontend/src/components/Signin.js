@@ -91,6 +91,7 @@ const Signin = () => {
               value={email}
               className="login-form-input"
               placeholder="Your Email"
+              autoComplete="off"
             />
             <input
               name="password"
@@ -99,6 +100,7 @@ const Signin = () => {
               value={password}
               className="login-form-input"
               placeholder="Your Password"
+              autoComplete="off"
             />
 
             <button type="submit" className="form-signin-btn">

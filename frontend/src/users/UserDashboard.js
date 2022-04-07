@@ -68,7 +68,7 @@ const UserDashboard = () => {
   return (
     <DashboardContainer>
       {userLinks()}
-      {userInfo()}
+      {/* {userInfo()} */}
       <Route path="/users-dashboard/:update-password">
         <UpdatePassword />
       </Route>

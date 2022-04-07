@@ -20,7 +20,7 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <ul className="dashboard">
+      <ul className="dashboard-links">
         <li className="dashboard-item">
           <Link className="dashboard-link" to="/admin-dashboard/update-profile">
             Update Profile
@@ -57,39 +57,40 @@ const AdminDashboard = () => {
     return (
       <div className="dashboard-info">
         <h3 className="dashboard-info__role">
-          {role.charAt(0).toUpperCase() + role.slice(1)} Information
+          {/* {role.charAt(0).toUpperCase() + role.slice(1)} Information */}
+          Welcome Back
         </h3>
-        <ul className="dashboard-info__list">
-          <li className="dashboard-info__list--item">
-            First Name: {firstName}
-          </li>
-          <li className="dashboard-info__list--item">Last Name: {lastName}</li>
-          <li className="dashboard-info__list--item">Email: {email}</li>
-          <li className="dashboard-info__list--item">Role: {role}</li>
-        </ul>
+        <p>
+          {firstName} {lastName}
+        </p>
+        <p className="dashboard-info__list--item">{email}</p>
       </div>
     );
   };
 
   return (
     <DashboardContainer>
-      {adminLinks()}
-      {adminInfo()}
-      <Route path="/admin-dashboard/:view-orders">
-        <Orders />
-      </Route>
-      <Route path="/admin-dashboard/:new-product">
-        <NewProduct />
-      </Route>
-      <Route path="/admin-dashboard/:view-products">
-        <ViewProducts />
-      </Route>
-      <Route path="/admin-dashboard/:update-password">
-        <UpdatePassword />
-      </Route>
-      <Route path="/admin-dashboard/:update-profile">
-        <UpdateProfile />
-      </Route>
+      <div className="dashboard-left">
+        {adminLinks()}
+        {adminInfo()}
+      </div>
+      <div className="dashboard-right">
+        <Route path="/admin-dashboard/:view-orders">
+          <Orders />
+        </Route>
+        <Route path="/admin-dashboard/:new-product">
+          <NewProduct />
+        </Route>
+        <Route path="/admin-dashboard/:view-products">
+          <ViewProducts />
+        </Route>
+        <Route path="/admin-dashboard/:update-password">
+          <UpdatePassword />
+        </Route>
+        <Route path="/admin-dashboard/:update-profile">
+          <UpdateProfile />
+        </Route>
+      </div>
     </DashboardContainer>
   );
 };

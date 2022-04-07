@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get('/api/v1/users/logout');
+      const res = await axios.get('http://localhost:4000/api/v1/users/logout');
       setTimeout(() => {
         localStorage.removeItem('jwt');
         setIsLoggedIn(false);

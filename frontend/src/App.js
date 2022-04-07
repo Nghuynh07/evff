@@ -15,6 +15,7 @@ import WholeSaleDashboard from './wholesale/WholeSaleDashboard';
 function App() {
   return (
     <div className="container">
+      <div className="bg"></div>
       <Navbar />
       <Switch>
         <Route path="/" exact>

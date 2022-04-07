@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import Loading from './Loading';
 import { useEffect } from 'react';
 
-const URL = 'http://localhost:4000/api/v1/users/signup';
+const URL = '/api/v1/users/signup';
 const Signup = () => {
   const aCtx = useContext(AuthContext);
   const { login, isAuthenticated } = aCtx;

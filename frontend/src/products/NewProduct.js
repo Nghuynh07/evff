@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import Input from '../components/Input';
+// import Input from '../components/Input';
 import { useProduct } from './use-product-hook';
-import FormLayout from '../layout/FormLayout';
 
 const NewProduct = () => {
   const { product, categories, inputChangeHandler, onSubmit, setProduct } =
@@ -11,66 +10,67 @@ const NewProduct = () => {
   }, []);
 
   return (
-    <FormLayout>
-      <form className="form" onSubmit={onSubmit}>
-        <h2 className="form-title">New Product</h2>
-        <div>
-          <label className="form-label">
-            <input
-              accept="image/*"
-              type="file"
-              name="photo"
-              className="input-input"
-              onChange={inputChangeHandler}
-            />
-          </label>
-        </div>
-        <Input
-          label="Name"
+    <div className="product-form-wrapper hidden">
+      <form className="product-form" onSubmit={onSubmit}>
+        <h2 className="product-form-title">New Product</h2>
+
+        <div className="error-wrapper">{}</div>
+        <input
+          accept="image/*"
+          type="file"
+          name="photo"
+          className="product-form-input"
+          htmlFor="photo"
+          onChange={inputChangeHandler}
+        />
+
+        <div className="error-wrapper">{}</div>
+        <input
           type="text"
           name="name"
-          for="name"
-          id="name"
+          className="product-form-input"
+          htmlFor="name"
           onChange={inputChangeHandler}
+          placeholder="Product Name"
         />
-
-        <Input
-          label="Price"
-          type="number"
+        <div className="error-wrapper">{}</div>
+        <input
+          type="text"
           name="price"
-          for="price"
-          id="price"
+          className="product-form-input"
+          htmlFor="price"
+          step="0.01"
           onChange={inputChangeHandler}
+          placeholder="Product Price"
         />
-
-        <Input
-          label="Packaging"
+        <div className="error-wrapper">{}</div>
+        <input
           type="text"
           name="packaging"
-          for="packaging"
-          id="packaging"
+          className="product-form-input"
+          htmlFor="packaging"
           onChange={inputChangeHandler}
+          placeholder="Product Packaging"
         />
-        <div className="form-category">
-          <label className="form-category-label">Category</label>
-          <select name="category" className="form-category-select">
-            <option value="" className="form-category-option"></option>
-            {categories.map((cat, index) => (
-              <option
-                key={index}
-                className="form-category-option"
-                onChange={(event) => inputChangeHandler(event)}
-              >
-                {cat}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button className="form-add-production-button" type="submit">
+        <div className="error-wrapper">{}</div>
+        <select name="category" className="product-form-input">
+          {/* <option value="" className="form-category-option"></option> */}
+          {categories.map((cat, index) => (
+            <option
+              key={index}
+              className="product-form-category-option"
+              onChange={(event) => inputChangeHandler(event)}
+            >
+              {cat}
+            </option>
+          ))}
+        </select>
+
+        <button className="form-product-btn product-btn" type="submit">
           Add Product
         </button>
       </form>
-    </FormLayout>
+    </div>
   );
 };
 

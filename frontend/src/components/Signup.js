@@ -1,4 +1,3 @@
-import FormLayout from '../layout/FormLayout';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 import axios from 'axios';
@@ -174,11 +173,11 @@ const Signup = () => {
   };
 
   return (
-    <FormLayout>
+    <>
       {redirectUser()}
       {loadScreen()}
       {showForm()}
-    </FormLayout>
+    </>
   );
 };
 

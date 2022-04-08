@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../store/auth-context';
 import { Redirect, useHistory } from 'react-router-dom';
-import FormLayout from '../layout/FormLayout';
 import Loading from './Loading';
-import Signup from './Signup';
 
 const Signin = () => {
   const [redirectToDashboard, setRedirectToDashBoard] = useState(false);
@@ -114,11 +112,11 @@ const Signin = () => {
   };
 
   return (
-    <FormLayout>
+    <>
       {loadScreen()}
       {redirectUser()}
       {showForm()}
-    </FormLayout>
+    </>
   );
 };
 

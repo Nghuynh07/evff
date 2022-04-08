@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-// import Product, { Card } from '../products/Product';
 import ProductsContainer from '../layout/ProductsContainer';
 import Loading from '../components/Loading';
 import { ProductContext } from '../store/product-context';

@@ -5,7 +5,14 @@ const sharp = require('sharp');
 const catchAsync = require('./../utils/catchAsync');
 const multerStorage = multer.memoryStorage();
 
-exports.getAllProducts = globalHandlers.getAll(Product);
+// exports.getAllProducts = globalHandlers.getAll(Product);
+exports.getAllProducts = (req, res) => {
+  Product.find({}).then((products) => {
+    res.json(products).catch((err) => {
+      res.json(err);
+    });
+  });
+};
 exports.createProduct = globalHandlers.createOne(Product);
 exports.getOneProduct = globalHandlers.getOne(Product);
 exports.updateOneProduct = globalHandlers.updateOne(Product);

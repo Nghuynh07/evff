@@ -19,31 +19,39 @@ const WholeSaleDashboard = () => {
 
   const userLinks = () => {
     return (
-      <div className="dashboard-links-wrapper flex-center">
-        <Link
-          className="dashboard-link"
-          to="/wholesale-dashboard/update-profile"
-        >
-          Update Profile
-        </Link>
-
-        <Link
-          className="dashboard-link"
-          to="/wholesale-dashboard/update-password"
-        >
-          Update Password
-        </Link>
-
-        <Link className="dashboard-link" to="/cart">
-          Cart
-        </Link>
-
-        <Link
-          className="dashboard-link"
-          to="/wholesale-dashboard/order-history"
-        >
-          Order History
-        </Link>
+      <div className="dashboard-links">
+        <li className="dashboard-item">
+          {' '}
+          <Link
+            className="dashboard-link"
+            to="/wholesale-dashboard/update-profile"
+          >
+            Update Profile
+          </Link>
+        </li>
+        <li className="dashboard-item">
+          <Link
+            className="dashboard-link"
+            to="/wholesale-dashboard/update-password"
+          >
+            Update Password
+          </Link>
+        </li>
+        <li className="dashboard-item">
+          {' '}
+          <Link className="dashboard-link" to="/cart">
+            Cart
+          </Link>
+        </li>
+        <li className="dashboard-item">
+          {' '}
+          <Link
+            className="dashboard-link"
+            to="/wholesale-dashboard/order-history"
+          >
+            Order History
+          </Link>
+        </li>
       </div>
     );
   };
@@ -52,33 +60,34 @@ const WholeSaleDashboard = () => {
     return (
       <div className="dashboard-info">
         <h3 className="dashboard-info__role">
-          {role.charAt(0).toUpperCase() + role.slice(1)} Information
+          {/* {role.charAt(0).toUpperCase() + role.slice(1)} Information */}
+          Welcome Back
         </h3>
-        <ul className="dashboard-info__list">
-          <li className="dashboard-info__list--item">
-            First Name: {firstName}
-          </li>
-          <li className="dashboard-info__list--item">Last Name: {lastName}</li>
-          <li className="dashboard-info__list--item">Email: {email}</li>
-          <li className="dashboard-info__list--item">Role: {role}</li>
-        </ul>
+        <p>
+          {firstName} {lastName}
+        </p>
+        <p className="dashboard-info__list--item">{email}</p>
       </div>
     );
   };
 
   return (
     <DashboardContainer>
-      {userLinks()}
-      {/* {userInfo()} */}
-      <Route path="/wholesale-dashboard/:update-password">
-        <UpdatePassword />
-      </Route>
-      <Route path="/wholesale-dashboard/:update-profile">
-        <UpdateProfile />
-      </Route>
-      <Route path="/wholesale-dashboard/:order-history">
-        <PurchaseHistory />
-      </Route>
+      <div className="dashboard-left">
+        {userLinks()}
+        {userInfo()}
+      </div>
+      <div className="dashboard-right">
+        <Route path="/wholesale-dashboard/:update-password">
+          <UpdatePassword />
+        </Route>
+        <Route path="/wholesale-dashboard/:update-profile">
+          <UpdateProfile />
+        </Route>
+        <Route path="/wholesale-dashboard/:order-history">
+          <PurchaseHistory />
+        </Route>
+      </div>
     </DashboardContainer>
   );
 };

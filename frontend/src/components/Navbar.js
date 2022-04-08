@@ -37,13 +37,13 @@ const Navbar = () => {
         <Link className="link" to="/home" title="Home">
           home
         </Link>
-        <Link className="link" to="/u-pick" title="Home">
+        {/* <Link className="link" to="/u-pick" title="Home">
           U-Pick
-        </Link>
+        </Link> */}
         <Link className="link" to="/shop" title="Home">
           Shop
         </Link>
-        <Link className="link" to="/livestock" title="Home">
+        {/* <Link className="link" to="/livestock" title="Home">
           Livestock
         </Link>
         <Link className="link" to="/aquaponics" title="Home">
@@ -54,7 +54,7 @@ const Navbar = () => {
         </Link>
         <Link className="link" to="/contact" title="Home">
           Contact
-        </Link>
+        </Link> */}
         <Link className="link" to="/cart" title="Cart">
           Cart
           {/* <span className="navbar-cart-size">{itemTotal()}</span> */}

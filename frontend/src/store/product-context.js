@@ -8,9 +8,11 @@ export const ProductContext = createContext({
   deleteProduct: () => {},
 });
 
+const url = '/api/v1/products';
+
 export const ProductProvider = ({ children }) => {
   const getProducts = async () => {
-    return await fetch(`http://localhost:4000/api/v1/products`, {
+    return await axios(url, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -56,12 +58,15 @@ export const ProductProvider = ({ children }) => {
   };
 
   const deleteProduct = async (token, productId) => {
-    let productToBeDeleted = await axios(`/api/v1/products/${productId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => {});
+    let productToBeDeleted = await axios(
+      `http://localhost:4000/api/v1/products/${productId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res) => {});
     return productToBeDeleted;
   };
   const values = {

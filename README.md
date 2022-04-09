@@ -27,6 +27,7 @@ entirely done by using the MERN stack.
 - Website is responsive using CSS grid and flexbox
 - All effects and anmiation is purely from CSS
 - There are a few more features that client is planning on adding in the near future: aquaponics system, news, u-pick, and a working online payment system.
+- UI designed is done by me (Strong interest in UI/UX design)
 
 ## Packages:
 - Axios

@@ -45,3 +45,20 @@ entirely done by using the MERN stack.
 with the server because some API such as login/logout/sign up are working but validations did not work and view order is history shown 'uncaught in promise' errors
 - Ran into cors issues during development but solve this my implementing 'Access-Control-Allow-Origin' to *
 
+## Front-End installation
+ - npx create-react-app <your project name>
+ - npm install react-router-dom@5 react-redux @reduxjs/tookkit
+  
+## Back-end installation
+ - npm install * packages listed in "packages" section
+  
+## Credit
+ - Product images are taken from googling
+ - Thank you Jonas Schmedtmann from Udemy for his course on backend. He also teaches other courses include Complete JavaScript Course, Advance CSS, SASS with Flexbos, Grid, Animation. I have taken all of his courses. Very detail recommended :)
+ - Thank you Ryan Dhungel from Udemy for your amazing ecommerce course. It contain both front and back end; however, I was particular interested in front-end.
+ - Thank you Code And Create on Udemy for your amazing web development classes on HTML, CSS animation and Vanilla Javascript. I have learns a tons about DOM manipulation.
+ - Thank you all for being part of my learning journey to become a front-end development. Not sure if you guys will ever see this but THANK YOU
+
+
+
+

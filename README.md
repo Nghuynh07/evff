@@ -1,5 +1,18 @@
 # Echo Valley Family Farm
 
+
+## Table of Content:
+
+- Description
+- Application overview
+- Project Features
+- Packages
+- Challenges
+- Front-end installation
+- Back-end installation
+- Credits
+
+
 ### Description:
 This is a full-stack ecommerce websit for a coworker startup business. Client mainly wants customers able to order products online. For this project, I took 2 udemy classes:
 Node.JS, Express, MongoDB from Jonas Schmedtmann for backend implementation and MERN stack React Node Ecommerce from Ryan Dhungel mainly for front-end. This website is

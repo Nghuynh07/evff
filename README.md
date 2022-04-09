@@ -18,6 +18,23 @@ This is a full-stack ecommerce websit for a coworker startup business. Client ma
 Node.JS, Express, MongoDB from Jonas Schmedtmann for backend implementation and MERN stack React Node Ecommerce from Ryan Dhungel mainly for front-end. This website is
 entirely done by using the MERN stack.
 
+
+<p align='center'>
+  <img src="homepage.png" width="500" height="350">
+ 
+  <img src="login.png" width="500" height="350">
+ 
+  <img src="products.png" width="500" height="350">
+ 
+  <img src="add.png" width="500" height="350">
+  <img src="new.png" width="500" height="350">
+  <img src="adminviewproducts.png" width="500" height="350">
+</p>
+
+
+
+
+
 ## Project Features:
 - User Authentications with roles. This allows wholesale to get 40% discount of all farm products.
 - Cart using localStorage
